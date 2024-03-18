@@ -4,11 +4,12 @@
 ### - Indicando test Unitarios y Test de Integration.
 
 ## Documentos Resources 
-- [Documento Layer Repositorio]()
-- [Documento Layer Service]()
+- [Documento Layer Repositorio](https://github.com/manuonda/java-project/blob/main/testing-base-container/Spring%20Boot%20Testing%20-JPA%20Repository.docx)
+- [Documento Layer Service](https://github.com/manuonda/java-project/blob/main/testing-base-container/Spring%20Boot%20Testing-%20Service%20Layer.docx)
 
 
 Diagrama de Imagen de Testing Layers Repository, Controller, 
+![Vista previa de la imagen](https://github.com/manuonda/java-project/blob/main/testing-base-container/diagrama_layer.png)
 
 
 
