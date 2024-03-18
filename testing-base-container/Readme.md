@@ -25,4 +25,21 @@
 
 
 
-Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
+## Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
+
+## Instrucciones de instalación y ejecución
+
+Sigue estos pasos para ejecutar el proyecto en tu máquina local:
+
+```bash
+# Clona el repositorio desde GitHub
+git clone https://github.com/manuonda/java-project.git
+
+# Navega al directorio del proyecto
+cd testing-base-container
+
+# Instala las dependencias (si es un proyecto de Maven)
+mvn clean install
+
+# Ejecuta las pruebas unitarias
+mvn test
