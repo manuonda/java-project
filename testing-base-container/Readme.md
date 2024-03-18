@@ -1,5 +1,4 @@
-## Project Demo de Testing Unitario , De Integracion. Test Containers basandome en un Dominio 
-## de clase Usuario.
+## Project Demo de Testing Unitario , De Integracion. Test Containers basandome en un Dominio de clase Usuario.
 
 
 ### - Project de Test de las capas siguientes: Layer Repository, Service, Controller. Sobre la Clase Usuario 
@@ -38,7 +37,7 @@ git clone https://github.com/manuonda/java-project.git
 # Navega al directorio del proyecto
 cd testing-base-container
 
-# Instala las dependencias (si es un proyecto de Maven)
+# Instala las dependencias
 mvn clean install
 
 # Ejecuta las pruebas unitarias

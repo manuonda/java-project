@@ -2,10 +2,14 @@
 
 #Development : manuonda(David Garcia)
 
-Listado de Recursos
+Listado de Recursos Inicializaciòn
 
-- [Testing Junit 5, Mockito, TestContainers ](https://github.com/manuonda/java-project/tree/main/testing-base-container)
+- [Testing Junit 5, Mockito, TestContainers Base ](https://github.com/manuonda/java-project/tree/main/testing-base-container)
 - [Desafio Marzo- 2024](https://www.ejemplo.com/git)
 - [Event Drive Tutorial - Base ]()
 - [Project Blog Event Driven "Spring Boot + Angular + AWS  +Apachek Kafka"] ()
+
+
+Listado de Recursos Medio-Avanzado:
+
 
