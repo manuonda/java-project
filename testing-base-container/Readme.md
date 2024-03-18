@@ -3,7 +3,12 @@
 ### - Project de Test de las capas siguientes: Layer Repository, Service, Controller. Sobre la Clase Usuario 
 ### - Indicando test Unitarios y Test de Integration.
 
-Diagrama de Imagen.
+## Documentos Resources 
+- [Documento Layer Repositorio]()
+- [Documento Layer Service]()
+
+
+Diagrama de Imagen de Testing Layers Repository, Controller, 
 
 
 
