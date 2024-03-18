@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgresql-container
+    ports:
+      - "5432:5432"
+    environment:
+      - 'POSTGRES_USER=root'
+      - 'POSTGRES_PASSWORD=root'
+      - 'POSTGRES_DB=db_course_test'
+    volumes:
+      - ./data_postgresql:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d  # Monta el directorio 'scripts' en el contenedor
+    networks:
+      - spring
+
+
+
+#volumes
+volumes:
+  postgesql_data:
+
+networks:
+  spring:
+    name: spring

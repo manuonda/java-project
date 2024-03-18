@@ -1,0 +1,46 @@
+
+server:
+  port: ${PORT:8081}
+
+spring:
+  application:
+    name: course-testing
+  datasource:
+    username: ${POSTGRES_USER:root}
+    password: ${POSTGRES_PASSWORD:root}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:db_course_test}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+#spring:
+#  application:
+#    name: course-testing
+#  datasource:
+#    username: ${POSTGRES_USER:root}
+#    password: ${POSTGRES_PASSWORD:root}
+#    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:db_course_testing}
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      show-sql: true
+
+
+#Configuracion de actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    probes:
+      enabled: true
+
+
+
