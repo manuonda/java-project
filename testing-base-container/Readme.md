@@ -15,7 +15,7 @@ Diagrama de Imagen de Testing Layers Repository, Controller,
 ![Vista previa de la imagen](https://github.com/manuonda/java-project/blob/main/testing-base-container/diagrama_layer.png)
 
 Diagrama de Imagen Test Integration.
-![Vista previa de la imagen ](https://github.com/manuonda/java-project/blob/main/testing-base-container/Test_Integration.png    )
+![Vista previa de la imagen ](https://github.com/manuonda/java-project/blob/main/testing-base-container/test_integration.png)
 
 
 
