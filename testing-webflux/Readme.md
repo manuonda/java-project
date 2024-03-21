@@ -1,0 +1,24 @@
+
+## PROJECT 
+docker run -d --name mongodb -p 27017:27017 mongo
+
+
+version: '3.1'
+
+services:
+mongodb:
+image: mongo
+container_name: mongodb
+restart: always
+ports:
+- "27017:27017"
+volumes:
+- mongodb_data:/data/db
+environment:
+- MONGO_INITDB_ROOT_USERNAME=admin
+- MONGO_INITDB_ROOT_PASSWORD=password
+
+volumes:
+mongodb_data:
+driver: local
+
