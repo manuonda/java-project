@@ -27,22 +27,35 @@ public class EmpleadoServiceImpl implements  EmpleadoService{
 
     @Override
     public Mono<EmpleadoDTO> buscarPorId(String id) {
-        return null;
+         Mono<Empleado> empleado = this.empleadoRepository.findById(id);
+         return empleado.map((entity) -> EmpleadoMapper.mapToEmpleadoDTO(entity));
     }
 
     @Override
     public Flux<EmpleadoDTO> getAllEmpleados() {
-        return null;
+        Flux<Empleado> listado = this.empleadoRepository.findAll();
+        return listado.map((entity) -> EmpleadoMapper.mapToEmpleadoDTO(entity))
+                .switchIfEmpty(Flux.empty());
     }
 
     @Override
     public Mono<EmpleadoDTO> actualizarEmpleado(EmpleadoDTO dto, String idEmpleado) {
-        return null;
+
+        Mono<Empleado> empleadoMono = this.empleadoRepository.findById(idEmpleado);
+        Mono<Empleado> updateEmpleado  = empleadoMono.flatMap((entity) -> {
+               entity.setFirstName(dto.getFirstName());
+               entity.setLastName(dto.getLastName());
+               entity.setEmail(dto.getEmail());
+               return empleadoRepository.save(entity);
+        });
+
+        return updateEmpleado.map(entity -> EmpleadoMapper.mapToEmpleadoDTO(entity));
+
     }
 
     @Override
     public Mono<Void> eliminarEmpleado(String idEmpleado) {
-        return null;
+       return this.empleadoRepository.deleteById(idEmpleado);
     }
 
 }
