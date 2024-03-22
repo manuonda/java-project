@@ -1,6 +1,16 @@
 
-## PROJECT 
-docker run -d --name mongodb -p 27017:27017 mongo
+## PROJECT Testing Spring Webflux , Mongo
+##
+
+* docker run -d --name  mongodb -p 27017:27017 mongo
+* docker exec -it mongodb bash 
+
+
+### Comandos mondogb 
+* show dbs <br>
+* use db_test <br>
+* db.empleados.find() <br>
+
 
 
 version: '3.1'
