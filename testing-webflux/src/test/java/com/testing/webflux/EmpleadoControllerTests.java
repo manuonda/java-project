@@ -19,6 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
+
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = EmpleadoController.class)
 public class EmpleadoControllerTests {
@@ -66,27 +68,31 @@ public class EmpleadoControllerTests {
     @DisplayName("Test Junit Method Get By Id Empleado")
     public void givenObjectEmpleado_whenGetByIdEmpleado_thenReturnObjectEmpleado() {
         //given - preparo nuestros datos
+        Long idEmpleado = 1L;
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
         empleadoDTO.setFirstName("david");
         empleadoDTO.setLastName("garcia");
         empleadoDTO.setEmail("manuonda@gmail.com");
 
-        BDDMockito.given(this.empleadoService.guardarEmpleado(ArgumentMatchers.any(EmpleadoDTO.class)))
+        BDDMockito.given(this.empleadoService.buscarPorId(ArgumentMatchers.any()))
                 .willReturn(Mono.just(empleadoDTO));
 
         //when - acciones a realizar para testing
-        WebTestClient.ResponseSpec response =  webTestClient.post().uri("/api/empleados")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .body(Mono.just(empleadoDTO), EmpleadoDTO.class)
-                .exchange();
+        WebTestClient.ResponseSpec response =  webTestClient.get().uri("/api/empleados/{id}", Collections.singletonMap("id", idEmpleado))
+                        .exchange();
 
         //then - verificamos la salida
-        response.expectStatus().isCreated()
+        response.expectStatus().isOk()
                 .expectBody()
                 .consumeWith(System.out::println)
                 .jsonPath("$.firstName").isEqualTo(empleadoDTO.getFirstName())
                 .jsonPath("$.lastName").isEqualTo(empleadoDTO.getLastName())
                 .jsonPath("$.email").isEqualTo(empleadoDTO.getEmail());
+    }
+
+    @Test
+    @DisplayName("Junit Method Test get All Empleados")
+    public void givenListObjectEmpleado_whenL(){
+
     }
 }
