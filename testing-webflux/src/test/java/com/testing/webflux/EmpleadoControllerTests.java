@@ -17,9 +17,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = EmpleadoController.class)
@@ -92,7 +95,58 @@ public class EmpleadoControllerTests {
 
     @Test
     @DisplayName("Junit Method Test get All Empleados")
-    public void givenListObjectEmpleado_whenL(){
+    public void givenListObjectEmpleado_whenfindListObjectEmpleado_returnListObjectEmpleados(){
+        //given
+        EmpleadoDTO emp1 = new EmpleadoDTO();
+        emp1.setFirstName("david");
+        emp1.setLastName("garcia");
+        emp1.setEmail("david.garcia@gmail.com");
+
+        EmpleadoDTO emp2 = new EmpleadoDTO();
+        emp2.setFirstName("andres");
+        emp2.setLastName("garcia");
+        emp2.setEmail("andres.garcia@gmail.com");
+        List<EmpleadoDTO> empleados = new ArrayList<>();
+        empleados.add(emp1);
+        empleados.add(emp2);
+
+        Flux<EmpleadoDTO> fluxEmpleados = Flux.fromIterable(empleados);
+
+        BDDMockito.given(this.empleadoService.getAllEmpleados()).willReturn(fluxEmpleados);
+
+        //when
+        WebTestClient.ResponseSpec response = webTestClient.get().uri("/api/empleados")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange();
+
+        //then
+        response.expectStatus().isOk()
+                .expectBodyList(EmpleadoDTO.class)
+                .consumeWith(System.out::println)
+                .hasSize(empleados.size());
+
+    }
+
+    @Test
+    @DisplayName("Test Junit Method Update Empleado")
+    public void givenObjectEmpleado_whenUpdateEmpleado_thenReturnObjectEmpleado(){
+
+      //given
+      EmpleadoDTO empleado = new EmpleadoDTO();
+      empleado.setFirstName("david");
+      empleado.setLastName("garcia");
+      empleado.setEmail("david.garcia@gmail.com");
+
+      BDDMockito.given(this.empleadoService.actualizarEmpleado(ArgumentMatchers.any(EmpleadoDTO.class),
+                      ArgumentMatchers.any(String.class)))
+              .willReturn(Mono.just(empleado));
+
+      //when
+      WebTestClient.ResponseSpec responseSpec = webTestClient.put().uri("/api/empleados/{id}", )
+      //then
+
+
+
 
     }
 }
