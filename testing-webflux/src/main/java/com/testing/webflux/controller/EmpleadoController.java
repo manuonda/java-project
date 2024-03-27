@@ -45,6 +45,7 @@ public class EmpleadoController {
   }
 
   @DeleteMapping("{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public Mono<Void> delete(@PathVariable("id") String idEmpleado){
     return this.empleadoService.eliminarEmpleado(idEmpleado);
   }

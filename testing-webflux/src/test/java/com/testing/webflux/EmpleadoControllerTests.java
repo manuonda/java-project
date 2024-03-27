@@ -132,6 +132,7 @@ public class EmpleadoControllerTests {
     public void givenObjectEmpleado_whenUpdateEmpleado_thenReturnObjectEmpleado(){
 
       //given
+        String idEmpleado ="1234";
       EmpleadoDTO empleado = new EmpleadoDTO();
       empleado.setFirstName("david");
       empleado.setLastName("garcia");
@@ -141,12 +142,41 @@ public class EmpleadoControllerTests {
                       ArgumentMatchers.any(String.class)))
               .willReturn(Mono.just(empleado));
 
-      //when
-      WebTestClient.ResponseSpec responseSpec = webTestClient.put().uri("/api/empleados/{id}", )
-      //then
+      //when - action or behavior
+       WebTestClient.ResponseSpec responseSpec = webTestClient.put()
+               .uri("/api/empleados/{id}", Collections.singletonMap("id",idEmpleado))
+               .contentType(MediaType.APPLICATION_JSON)
+               .accept(MediaType.APPLICATION_JSON)
+               .body(Mono.just(empleado), EmpleadoDTO.class)
+               .exchange();
 
+        //then - verify the result or output
+        responseSpec.expectStatus().isOk()
+                .expectBody()
+                .consumeWith(System.out::println)
+                .jsonPath("$.firstName").isEqualTo(empleado.getFirstName())
+                .jsonPath("$.lastName").isEqualTo(empleado.getLastName());
 
+    }
 
+    //Test for
+    @Test
+    @DisplayName("Junit Method Delete by Id")
+    public void givenEmpleadoId_whenDeleteEmpleadoById_thenReturnEmptyObject() {
+        //given - preparo nuestros datos
+        String idEmpleado = "1234";
+        Mono<Void> voidMono = Mono.empty();
 
+        BDDMockito.given(this.empleadoService.eliminarEmpleado(idEmpleado))
+                .willReturn(voidMono);
+
+        //when - acciones a realizar para testing
+        WebTestClient.ResponseSpec response = webTestClient.delete().uri("/api/empleados/{id}", Collections.singletonMap("id",idEmpleado))
+                .exchange();
+
+        //then - verificamos la salida
+        response.expectStatus().isNoContent()
+                .expectBody()
+                .consumeWith(System.out::println);
     }
 }
