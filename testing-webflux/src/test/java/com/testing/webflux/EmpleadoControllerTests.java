@@ -3,7 +3,6 @@ package com.testing.webflux;
 
 import com.testing.webflux.controller.EmpleadoController;
 import com.testing.webflux.dto.EmpleadoDTO;
-import com.testing.webflux.entity.Empleado;
 import com.testing.webflux.service.EmpleadoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,6 +22,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * Class correspondiente a test unitarios
+ */
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = EmpleadoController.class)
 public class EmpleadoControllerTests {
