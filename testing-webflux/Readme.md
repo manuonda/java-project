@@ -7,9 +7,13 @@
 ### - Ademas de Utilizar TestContainers
 
 ## Documents Resources
-[Document Spring Webflux]()
+[Document Spring Webflux](https://github.com/manuonda/java-project/blob/main/testing-webflux/Spring%20WebFlux.docx)
 
 ## Diagrama de Layers.
+
+![Vista previa de la imagen](https://raw.githubusercontent.com/manuonda/java-project/main/testing-webflux/diagram_spring_webflux.png)
+
+
 
 
 ## Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
