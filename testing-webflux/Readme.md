@@ -1,10 +1,10 @@
 
-## PROJECT Testing Spring Webflux , Mongo
+## Project Testing Spring Webflux , MongoDb
 ##
 
-### - Project de Test de las capas siguientes: Layer Repository, Service, Controller. Sobre la Clase Empleado
-### - Indicando test Unitarios y Test de Integration.
-### - Ademas de Utilizar TestContainers
+ - Project de Test de las capas siguientes: Layer Repository, Service, Controller. Sobre la Clase Empleado
+ - Indicando test Unitarios y Test de Integration.
+ - Ademas de Utilizar TestContainers
 
 ## Documents Resources
 [Document Spring Webflux](https://github.com/manuonda/java-project/blob/main/testing-webflux/Spring%20WebFlux.docx)
@@ -16,13 +16,13 @@
 
 
 
-## Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
+### Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
 
-## Instrucciones de instalación y ejecución
+### Instrucciones de instalación y ejecución
 
 Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
-## Requeriments:
+### Requeriments:
 * Es necesario [Docker](https://docs.docker.com/engine/install/)
 * La version minima de Java es 17
 
