@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * Class correspondiente a test unitarios
+ * de la clase EmpleadoController WebFlux
  */
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = EmpleadoController.class)

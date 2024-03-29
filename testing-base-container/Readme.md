@@ -5,7 +5,7 @@
 ### - Indicando test Unitarios y Test de Integration.
 ### - Ademas de Utilizar TestContainers
 
-## Documentos Resources 
+## Documents Resources 
 - [Documento Layer Repositorio](https://github.com/manuonda/java-project/blob/main/testing-base-container/Spring%20Boot%20Testing%20-JPA%20Repository.docx)
 - [Documento Layer Service](https://github.com/manuonda/java-project/blob/main/testing-base-container/Spring%20Boot%20Testing-%20Service%20Layer.docx)
 - [Documento Test Integration](https://github.com/manuonda/java-project/blob/main/testing-base-container/Integration%20Test.docx)
@@ -29,6 +29,10 @@
 ## Instrucciones de instalación y ejecución
 
 Sigue estos pasos para ejecutar el proyecto en tu máquina local:
+
+## Requeriments:
+* Es necesario [Docker](https://docs.docker.com/engine/install/)
+* La version minima de Java es 17
 
 ```bash
 # Clona el repositorio desde GitHub
