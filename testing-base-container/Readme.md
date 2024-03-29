@@ -19,9 +19,9 @@
 
 ## Diagrama de Imagen Test Integration.
 
-![Vista previa de la imagen](https://raw.githubusercontent.com/manuonda/java-project/main/testing-base-container/test_integration.png)
+[![Vista previa de la imagen](https://raw.githubusercontent.com/manuonda/java-project/main/testing-base-container/test_integration.png)
 
-
+### ](`**~~`https://github.com/manuonda/java-project/blob/main/testing-webflux/spring_webflux_test.png`~~**`)
 
 
 ## Basandome en el curso de Udemy siguiente: https://www.udemy.com/course/testing-spring-boot-application-with-junit-and-mockito/
