@@ -1,17 +1,26 @@
 package com.testing.webflux;
 
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
-public abstract  class AbstractContainerBaseTest {
 
-    static final MongoDBContainer MONGO_DB_CONTAINER;
 
-    static {
-        MONGO_DB_CONTAINER = new  MongoDBContainer("mongo:latest").withExposedPorts(27017);
+@Testcontainers
+public class AbstractContainerBaseTest {
 
-        MONGO_DB_CONTAINER.start();
-        var mappedPort = MONGO_DB_CONTAINER.getMappedPort(27017);
-        System.setProperty("mongodb.container.port", String.valueOf(mappedPort));
+
+    @Container
+    @ServiceConnection
+    public static final  MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:latest"))
+            .withExposedPorts(27017)
+                .waitingFor(Wait.forLogMessage(".*Waiting for connections.*\\n", 1));
+
+
+    static{
+        mongoDBContainer.start();
     }
-
 }
