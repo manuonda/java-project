@@ -8,6 +8,9 @@
 
 - [Testing Spring Webflux , TestContainers ](https://github.com/manuonda/java-project/tree/main/testing-webflux )
 
+## List Spring Boot IA
+- [Spring Boot IA - Base Prompt , PromptTemplate, Imagen](https://github.com/manuonda/java-project/tree/main/ia/open-ai-chat)
+
 ## List Resources Applications
 
 En Curso.
