@@ -74,7 +74,7 @@ public class RestPrompts {
 
     /**
      * Parseo de salida en una clase
-     * 
+     *
      * @param actor
      * @return
      */
