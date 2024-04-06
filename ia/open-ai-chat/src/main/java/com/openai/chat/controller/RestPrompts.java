@@ -1,5 +1,6 @@
-package com.openai.chat;
+package com.openai.chat.controller;
 
+import com.openai.chat.dto.ActorFilms;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.prompt.Prompt;

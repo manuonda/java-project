@@ -1,4 +1,4 @@
-package com.openai.chat;
+package com.openai.chat.controller;
 
 
 import org.springframework.ai.embedding.EmbeddingClient;
@@ -11,5 +11,6 @@ public class RestEmbedding {
     
     public RestEmbedding(EmbeddingClient embeddingClient){
           this.embeddingClient = embeddingClient;
+
     }
 }
