@@ -1,0 +1,35 @@
+[
+      {
+        "nombre": "Pikachu",
+        "tipo": "Eléctrico",
+        "habilidades": ["Estática", "Pararrayos"],
+        "altura": "0.4 m",
+        "peso": "6.0 kg",
+        "shortDescription": "El Pokémon ratón eléctrico",
+        "descripcion": "Pikachu es un Pokémon tipo eléctrico, conocido por su cola en forma de rayo y su capacidad para generar y almacenar electricidad en sus mejillas. Es la mascota más reconocible de la franquicia Pokémon.",
+        "tag": ["mascota", "eléctrico"]
+      },
+      {
+        "nombre": "Charmander",
+        "tipo": "Fuego",
+        "habilidades": ["Mar llamas"],
+        "altura": "0.6 m",
+        "peso": "8.5 kg",
+        "shortDescription": "El Pokémon lagarto de fuego",
+        "descripcion": "Charmander es un Pokémon tipo fuego, reconocido por tener una llama en la punta de su cola. Es un Pokémon reptiliano pequeño, pero con el tiempo puede evolucionar en Charizard, una criatura poderosa de tipo fuego/volador.",
+        "tag": ["inicial", "fuego"]
+      },
+      {
+        "nombre": "Squirtle",
+        "tipo": "Agua",
+        "habilidades": ["Torrente"],
+        "altura": "0.5 m",
+        "peso": "9.0 kg",
+        "shortDescription": "El Pokémon tortuga",
+        "descripcion": "Squirtle es un Pokémon tipo agua, caracterizado por su caparazón en forma de tortuga. Tiene la habilidad de disparar agua a alta presión desde su boca. Squirtle es el primero de los Pokémon iniciales de tipo agua de la región de Kanto.",
+        "tag": ["inicial", "agua"]
+      }
+   
+ ]
+
+  

@@ -1,4 +1,4 @@
-package com.openai.chat;
+package com.openai.chat.dto;
 
 import java.util.List;
 
