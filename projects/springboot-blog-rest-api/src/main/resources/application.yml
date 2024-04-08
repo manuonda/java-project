@@ -1,0 +1,16 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: Spring Blog Application
+  datasource :
+    url: jdbc:mysql://localhost:3306/my_blog
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+
+
