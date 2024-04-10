@@ -14,7 +14,7 @@
 - Java Framework: Spring Framework, Spring Security , Spring JPA.
 - Token Base Authentication : JWT
 - Database: MySQL
-- Cloud for Deployment : AWS Cloud 
+- Cloud for Deployment : AWS Cloud
 
 
  ### Diagrama de Project.
