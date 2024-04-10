@@ -1,6 +1,7 @@
 package com.springboot.blog.service.impl;
 
 import com.springboot.blog.entity.Post;
+import com.springboot.blog.exception.EntityFoundException;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
@@ -24,8 +25,10 @@ public class PostServiceImpl implements PostService {
 
         Optional<Post> findPost = this.postRepository.findByTitle(postDTO.getTitle());
         if ( findPost.isPresent()){
-
+          throw new EntityFoundException("The Post title exist");
         }
+
+
 
 
         return null;
