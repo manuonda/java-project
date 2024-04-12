@@ -4,10 +4,13 @@ import com.springboot.blog.entity.Post;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -99,4 +102,28 @@ public class PostTests {
         assertThat(postFind).isNotNull();
         assertThat(postFind.getId()).isGreaterThan(0);
     }
+
+
+    @Test
+    @DisplayName("Test Method Delet by Id")
+    public void given_when_then(){
+        //given
+        Post post = Post.builder()
+                .title("description numero one")
+                .content("contendio ")
+                .description("description")
+                .build();
+        this.postRepository.save(post);
+
+        //when
+        this.postRepository.delete(post);
+        Optional<Post> findPost = this.postRepository.findById(post.getId());
+
+        //then
+        assertThat(findPost)
+                .as("The post should not be found after delete")
+                .isEmpty();
+
+    }
+
 }
