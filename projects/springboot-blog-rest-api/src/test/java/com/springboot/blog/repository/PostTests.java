@@ -1,6 +1,5 @@
 package com.springboot.blog.repository;
 
-
 import com.springboot.blog.entity.Post;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -18,29 +17,28 @@ public class PostTests {
     @Autowired
     private PostRepository postRepository;
 
-
     @Test
     @DisplayName("Test Junit Method Save Post")
-    public void givenObjectPost_whenSavePost_thenReturnObjectPost(){
-        //given
+    public void givenObjectPost_whenSavePost_thenReturnObjectPost() {
+        // given
         Post post = new Post();
         post.setId(1L);
         post.setTitle("Title one");
         post.setDescription("Descriptio One");
         post.setContent("Information");
 
-        //when
+        // when
         Post postSaved = this.postRepository.save(post);
 
-        //then
+        // then
         assertThat(postSaved).isNotNull();
         assertThat(postSaved.getId()).isGreaterThan(0);
     }
 
     @Test
     @DisplayName("Test Jnit Method Get All Post")
-    public void givenListObjectPost_whenGetAllPosts_thenReturnListObject(){
-        //given
+    public void givenListObjectPost_whenGetAllPosts_thenReturnListObject() {
+        // given
         Post post = Post.builder()
                 .title("title one")
                 .content("content one")
@@ -55,18 +53,18 @@ public class PostTests {
                 .build();
         this.postRepository.save(post1);
 
-        //when
+        // when
         List<Post> posts = this.postRepository.findAll();
 
-        //then
+        // then
         assertThat(posts).isNotNull();
         assertThat(posts.size()).isEqualTo(2);
     }
 
     @Test
     @DisplayName("Junit Method Test find By Id")
-    public void givenObjectPost_whenFindById_thenReturnObjectPost(){
-        //given
+    public void givenObjectPost_whenFindById_thenReturnObjectPost() {
+        // given
         Post post = Post.builder()
                 .title("title one")
                 .content("content one")
@@ -74,12 +72,31 @@ public class PostTests {
                 .build();
 
         this.postRepository.save(post);
-        //when
-         Post postFind = this.postRepository.findById(post.getId()).get();
+        // when
+        Post postFind = this.postRepository.findById(post.getId()).get();
 
-         //then
+        // then
         assertThat(postFind).isNotNull();
         assertThat(postFind.getId()).isGreaterThan(0);
         assertThat(post.getTitle()).contains("title one");
+    }
+
+    @Test
+    @DisplayName("Junit Methdo Test find by Title")
+    public void givenObjectPost_whenFindByTitle_thenReturnObjectPost() {
+        // given
+        Post post = Post.builder()
+                .title("title one")
+                .content("content one")
+                .description("description one")
+                .build();
+
+        this.postRepository.save(post);
+        // when
+        Post postFind = this.postRepository.findByTitle("title one").get();
+
+        //then 
+        assertThat(postFind).isNotNull();
+        assertThat(postFind.getId()).isGreaterThan(0);
     }
 }
