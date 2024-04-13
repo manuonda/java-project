@@ -76,11 +76,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deleteById(Long id) {        
-      if( !postRepository.existsById(id)){
-         throw new EntityNotFoundException("Post Not Found");
-      }
-      this.postRepository.deleteById(id);
+    public void deleteById(Long id) {  
+      Post post = this.postRepository.findById(id)
+      .orElseThrow(() -> new  EntityNotFoundException("Post Not Found"));
+      
+      this.postRepository.delete(post);
     }
 
 
