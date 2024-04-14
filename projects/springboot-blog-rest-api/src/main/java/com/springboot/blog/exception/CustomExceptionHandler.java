@@ -29,7 +29,7 @@ public class CustomExceptionHandler {
     }
 
 
-    @ExceptionHandler(EntityFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ResponseExceptionDTO> handlerEntityNotFound(EntityNotFoundException ex){
         ResponseExceptionDTO dto  = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
