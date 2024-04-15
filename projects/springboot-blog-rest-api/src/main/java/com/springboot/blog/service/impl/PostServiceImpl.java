@@ -4,8 +4,14 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.EntityFoundException;
 import com.springboot.blog.exception.EntityNotFoundException;
 import com.springboot.blog.payload.PostDTO;
+import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,11 +42,27 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPosts() {
-        List<Post> posts = this.postRepository.findAll();
-        return posts.stream()
-                .map(entity -> mapToDTO(entity))
+    public PostResponseDTO getAllPosts(int pageNo,int pageSize, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+        : Sort.by(sortBy).descending();
+
+        //create pageable instance
+        Pageable pageable = PageRequest.of(pageNo, pageSize,sort);
+        Page<Post> pagePosts = this.postRepository.findAll(pageable);
+        //get content for page object
+        List<Post> posts = pagePosts.getContent();
+
+        List<PostDTO> postDTOs =  posts.stream()
+                .map(this::mapToDTO)
                 .toList();
+
+        return  new PostResponseDTO(
+            postDTOs, 
+            pagePosts.getNumber(), 
+            pagePosts.getSize(), 
+            pagePosts.getTotalElements(), 
+            pagePosts.getTotalPages(), 
+            pagePosts.isLast()); 
     }
 
     @Override
