@@ -9,21 +9,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
 /**
  * Controller Advice: Responsable of captura exception the manera global
  */
 @RestControllerAdvice
-public class CustomExceptionHandler {
+public class CustomExceptionHandler  extends ResponseEntityExceptionHandler{
 
 
     private static Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
 
+    //handel specific exceptions
     @ExceptionHandler(EntityFoundException.class)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseExceptionDTO> handlerEntityFound(EntityFoundException ex){
+      logger.info("handlerEntity Found : ".concat(ex.getMessage()));
       ResponseExceptionDTO dto = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.OK.value());
       return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
@@ -32,6 +35,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ResponseExceptionDTO> handlerEntityNotFound(EntityNotFoundException ex){
+        logger.info("handlerEntityNotFound : ".concat(ex.getMessage()));
         ResponseExceptionDTO dto  = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
         return ResponseEntity.ok(dto);
     }
