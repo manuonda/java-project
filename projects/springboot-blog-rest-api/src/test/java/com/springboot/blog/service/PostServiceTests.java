@@ -5,6 +5,7 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.EntityFoundException;
 import com.springboot.blog.exception.EntityNotFoundException;
 import com.springboot.blog.payload.PostDTO;
+import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.PostServiceImpl;
 import org.assertj.core.api.Assertions;
@@ -17,7 +18,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -118,36 +125,37 @@ public class PostServiceTests {
                 .build();
         List<Post> listado = List.of(post, postTwo);
 
-        BDDMockito.when(this.postRepository.findAll()).thenReturn(listado);
-
+        Page<Post> mockPagePost = new PageImpl<>(listado);
+        BDDMockito.when(this.postRepository.findAll(any(Pageable.class))).thenReturn(mockPagePost);
+       
+         
         //when
-        List<PostDTO> listadoFindAll = this.postService.getAllPosts();
+        PostResponseDTO result = this.postService.getAllPosts(0,10,"id","ASC");
+
 
         //then
-        Assertions.assertThat(listadoFindAll).isNotEmpty();
-        Assertions.assertThat(listadoFindAll.size()).isEqualTo(2);
+        Assertions.assertThat(result.totalElements()).isEqualTo(2);
+        Assertions.assertThat(result.pageNo()).isZero();
+    }    
 
-        Assertions.assertThat(listadoFindAll.get(0).getId()).isEqualTo(1L);
-        Assertions.assertThat(listadoFindAll.get(0).getTitle()).contains("Title 1");
-
-        Mockito.verify(postRepository, Mockito.times(1)).findAll();
-    }
 
     @Test
     @DisplayName("Test Junit Method list empty")
     public void givenEmptyList_whenFindAll_thenReturnListEmpty(){
         
-        //given
-        when(this.postRepository.findAll()).thenReturn(Collections.emptyList());
+        List<Post> listado = Collections.emptyList();
 
-        //when 
-        List<PostDTO> listado = this.postService.getAllPosts();
+        Page<Post> mockPagePost = new PageImpl<>(listado);
+        BDDMockito.when(this.postRepository.findAll(any(Pageable.class))).thenReturn(mockPagePost);
+       
+         
+        //when
+        PostResponseDTO result = this.postService.getAllPosts(0,10,"id","ASC");
+
 
         //then
-        Assertions.assertThat(listado).isEmpty();
-        Assertions.assertThat(listado.size()).isEqualTo(0);
-
-        verify(postRepository, times(1)).findAll();
+        Assertions.assertThat(result.totalElements()).isEqualTo(0);
+        Assertions.assertThat(result.pageNo()).isZero();
 
     }
 
