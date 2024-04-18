@@ -2,7 +2,7 @@ package com.springboot.blog.service.impl;
 
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.EntityFoundException;
-import com.springboot.blog.exception.EntityNotFoundException;
+import com.springboot.blog.exception.ResourceNotFound;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.repository.PostRepository;
@@ -69,7 +69,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO updatePost(PostDTO postDTO, Long id) {
 
         Post post = this.postRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Post not exist"));
+        .orElseThrow(() -> new ResourceNotFound("Post not exist"));
 
         // Check if title already exists in another post 
         postRepository.findByTitle(postDTO.getTitle())
@@ -94,13 +94,13 @@ public class PostServiceImpl implements PostService {
     public PostDTO findById(Long id) {
       return this.postRepository.findById(id)
        .map(this::mapToDTO)
-       .orElseThrow(() -> new EntityNotFoundException("Post not exist"));
+       .orElseThrow(() -> new ResourceNotFound("Post not exist"));
     }
 
     @Override
     public void deleteById(Long id) {  
       Post post = this.postRepository.findById(id)
-      .orElseThrow(() -> new  EntityNotFoundException("Post Not Found"));
+      .orElseThrow(() -> new  ResourceNotFound("Post Not Found"));
       
       this.postRepository.delete(post);
     }

@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 
+import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.service.PostService;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -28,10 +28,13 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @RequestMapping("/api/v1/posts")
 @RestController
-@AllArgsConstructor
 public class PostController {
 
     private final PostService postService;
+
+    public PostController(PostService postService){
+        this.postService = postService;
+    }
 
     @GetMapping
     public ResponseEntity<PostResponseDTO> getAllPosts(
