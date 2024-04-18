@@ -24,6 +24,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(EntityFoundException.class)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ResponseExceptionDTO> handlerEntityFound(EntityFoundException ex){
+      logger.info("ExceptionEntityFound : ".concat(ex.getMessage()));
       ResponseExceptionDTO dto = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.OK.value());
       return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
@@ -32,7 +33,8 @@ public class CustomExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ResponseExceptionDTO> handlerEntityNotFound(EntityNotFoundException ex){
-        ResponseExceptionDTO dto  = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
+      logger.info("Exception Not Found ");  
+      ResponseExceptionDTO dto  = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
         return ResponseEntity.ok(dto);
     }
 
