@@ -3,7 +3,6 @@ package com.springboot.blog.service;
 
 import java.util.List;
 
-import com.springboot.blog.entity.Comment;
 import com.springboot.blog.payload.CommentDTO;
 
 /***

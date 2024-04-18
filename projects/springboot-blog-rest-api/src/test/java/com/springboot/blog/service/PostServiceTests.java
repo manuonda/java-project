@@ -3,7 +3,7 @@ package com.springboot.blog.service;
 
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.EntityFoundException;
-import com.springboot.blog.exception.EntityNotFoundException;
+import com.springboot.blog.exception.ResourceNotFound;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.repository.PostRepository;
@@ -183,7 +183,7 @@ public class PostServiceTests {
         Long id = 1L;
         when(this.postRepository.findById(id)).thenReturn(Optional.empty());
 
-       org.junit.jupiter.api.Assertions.assertThrows(EntityNotFoundException.class, () ->{
+       org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFound.class, () ->{
           this.postService.findById(id);
        },"Not Found Post by Id");
 
@@ -219,7 +219,7 @@ public class PostServiceTests {
       //given 
        when(this.postRepository.findById(anyLong())).thenReturn(Optional.empty()); 
       //when 
-      org.junit.jupiter.api.Assertions.assertThrows(EntityNotFoundException.class, () -> {
+      org.junit.jupiter.api.Assertions.assertThrows(ResourceNotFound.class, () -> {
          this.postService.deleteById(anyLong());
       });
       

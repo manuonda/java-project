@@ -19,15 +19,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.hamcrest.CoreMatchers.is;
 
 
-import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.service.PostService;
-import com.springboot.blog.service.impl.PostServiceImpl;
 
 @WebMvcTest(PostController.class)
 public class PostControllerTests  {
@@ -46,7 +43,7 @@ public class PostControllerTests  {
 
     @Test
     @DisplayName("Test Junit Method Save Post")
-    public void givenObjectUsuarioDTO_whenSavePost_thenReturnObjectPostDTO() throws JsonProcessingException, Exception{
+    public void givenObjectUsuarioDTO_whenSavePost_thenReturnObjectPostDTO() throws Exception{
         //given
         PostDTO dto  = new PostDTO();
         dto.setTitle("title one");

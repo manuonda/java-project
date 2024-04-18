@@ -15,9 +15,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService{
 
-    private final CommentService commentService;
-
-    private final PostService postService;
 
 	@Override
 	public CommentDTO createComment(CommentDTO commentDTO) {
