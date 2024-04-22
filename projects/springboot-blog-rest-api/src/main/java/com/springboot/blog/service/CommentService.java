@@ -16,7 +16,7 @@ public interface CommentService {
     * @param commentDTO
     * @return
     */ 
-   CommentDTO createComment(CommentDTO commentDTO);
+   CommentDTO createComment(Long idPost, CommentDTO commentDTO);
 
    /**
     * 
@@ -29,16 +29,17 @@ public interface CommentService {
     * Update Commetn
     * @param commentDTO
     * @param idComment
+    * @param idPost
     * @return
     */
-   CommentDTO updateComment(CommentDTO commentDTO , Long idComment);
+   CommentDTO updateComment(Long idPost, Long idComment, CommentDTO commentDTO );
 
    /**
     * GetByIdComment
     * @param idComment
     * @return
     */
-   CommentDTO getById(Long idComment);
+   CommentDTO getById(Long idPost, Long idComment);
 
    /**
     * Delete Comment

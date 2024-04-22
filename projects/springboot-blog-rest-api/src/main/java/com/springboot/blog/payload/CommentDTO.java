@@ -21,4 +21,7 @@ public class CommentDTO {
     @NotEmpty
     @Size(min=10, message ="Commen body not be null or empty ")
     private String body;
+
+    @NotEmpty(message="Post not be null")
+    private Long idPost;
 }

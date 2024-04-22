@@ -10,6 +10,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  security:
+   user:
+      name: david
+      password: david
+      roles: ADMIN
 
 
 
