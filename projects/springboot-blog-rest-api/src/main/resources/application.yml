@@ -14,7 +14,6 @@ spring:
    user:
       name: david
       password: david
-      roles: ADMIN
 
 
 

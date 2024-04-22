@@ -1,10 +1,8 @@
 package com.springboot.blog.service;
 
-import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
 
-import java.util.List;
 
 public interface PostService {
 
