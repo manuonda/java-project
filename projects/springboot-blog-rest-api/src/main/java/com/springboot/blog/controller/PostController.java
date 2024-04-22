@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 /**
  * RestController c
  */
-@RequestMapping("/api/v1/posts")
 @RestController
+@RequestMapping("api/v1/posts")
 public class PostController {
 
     private final PostService postService;

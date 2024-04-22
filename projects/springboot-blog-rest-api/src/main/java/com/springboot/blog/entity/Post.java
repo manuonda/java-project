@@ -35,6 +35,7 @@ public class Post {
 
 
     @OneToMany(mappedBy = "post" , cascade = CascadeType.ALL, orphanRemoval = true )
+    @Builder.Default
     Set<Comment> comments = new HashSet<>();
 
 
