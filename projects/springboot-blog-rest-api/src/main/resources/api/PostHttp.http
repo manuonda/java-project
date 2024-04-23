@@ -1,0 +1,5 @@
+GET http://localhost:8085/api/v1/posts
+Content-type: application/json
+Authorization: Basic ZGF2aWQ6ZGF2aWQ=
+
+
