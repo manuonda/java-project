@@ -3,10 +3,12 @@ package com.springboot.blog.exception;
 
 import com.springboot.blog.payload.ResponseExceptionDTO;
 
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -52,6 +54,13 @@ public class CustomExceptionHandler  extends ResponseEntityExceptionHandler{
     public ResponseEntity<ResponseExceptionDTO> handleGlobalException(GlobalExceptionHandler ex){
       ResponseExceptionDTO dto  = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
       return ResponseEntity.ok(dto);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ResponseExceptionDTO> handleAccessDeniedException(AccessDeniedException ex){
+        ResponseExceptionDTO dto = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.UNAUTHORIZED.value());
+         return ResponseEntity.ok(dto);
     }
 
 
