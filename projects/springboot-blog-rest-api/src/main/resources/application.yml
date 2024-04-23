@@ -10,10 +10,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  security:
-   user:
-      name: david
-      password: david
+  # security:
+  #  user:
+  #     name: david
+  #     password: david
 
 
 
