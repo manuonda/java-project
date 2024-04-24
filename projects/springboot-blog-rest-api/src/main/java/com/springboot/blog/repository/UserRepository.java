@@ -9,7 +9,7 @@ import com.springboot.blog.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByEmai(String email);
+    Optional<User> findByEmail(String email);
 
     Optional<User> findByUsernameOrEmail(String  username , String email);
 
