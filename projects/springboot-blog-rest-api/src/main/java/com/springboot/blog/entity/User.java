@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class User {
     private String username;
 
     @Column(nullable = false, unique = true)
-    private Email email;
+    private String email;
 
     @Column(nullable = false)
     private String password;
