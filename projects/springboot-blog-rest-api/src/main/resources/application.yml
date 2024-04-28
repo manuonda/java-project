@@ -10,7 +10,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  flyway:
+    show-sql: true
+        
+  #flyway:
 
   # security:
   #  user:
