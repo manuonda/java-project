@@ -14,6 +14,15 @@ import com.springboot.blog.entity.User;
 import com.springboot.blog.exception.ResourceNotFound;
 import com.springboot.blog.repository.UserRepository;
 
+/**
+ * este código implementa un servicio personalizado (CustomUserDetailsService)
+ * para cargar detalles de usuario para la autenticación y la autorización en
+ * Spring Security. Utiliza un UserRepository para buscar un usuario por su
+ * nombre de usuario, recupera los roles asignados a ese usuario y los devuelve
+ * en un objeto UserDetails que puede ser utilizado por Spring Security para la
+ * autenticación y autorización de usuarios.
+ */
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
