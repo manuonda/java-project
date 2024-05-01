@@ -24,4 +24,7 @@ public class PostDTO {
     private String description;
 
     private Set<CommentDTO> comments;
+
+    private CategoryDTO category;
+    
 }

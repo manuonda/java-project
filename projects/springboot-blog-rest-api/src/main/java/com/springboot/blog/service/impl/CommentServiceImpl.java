@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
-import com.springboot.blog.exception.GlobalExceptionHandler;
+import com.springboot.blog.exception.BlogApiException;
 import com.springboot.blog.exception.ResourceNotFound;
 import com.springboot.blog.payload.CommentDTO;
 import com.springboot.blog.repository.CommentRepository;
@@ -64,7 +64,7 @@ public class CommentServiceImpl implements CommentService {
 				.orElseThrow(() -> new ResourceNotFound("Comment Not Found"));
 
 		if (!comment.getPost().getId().equals(post.getId())) {
-			throw new GlobalExceptionHandler("Comment does not belong Post");
+			throw new BlogApiException("Comment does not belong Post");
 		}
 
 		comment.setBody(commentDTO.getBody());
@@ -92,7 +92,7 @@ public class CommentServiceImpl implements CommentService {
 				.orElseThrow(() -> new ResourceNotFound("Comment Not Found"));
 
 		if (!comment.getPost().getId().equals(post.getId())) {
-			throw new GlobalExceptionHandler("Comment does not belong Post");
+			throw new BlogApiException("Comment does not belong Post");
 		}
 
 		this.postRepository.delete(post);
