@@ -1,4 +1,4 @@
-package com.springboot.blog.config;
+package com.springboot.blog.security;
 
 import java.io.IOException;
 
@@ -10,6 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+/**
+ * Clase que maneja las exceptions al momento de manejar 
+ * las exceptions de authentication en la configuracion de 
+ * seguridad
+ */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint{
 
@@ -17,7 +23,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint{
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
         
-                response.sendError(0, null);
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }
 
     

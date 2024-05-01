@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.blog.payload.JWTAuthResponse;
 import com.springboot.blog.payload.LoginDTO;
 import com.springboot.blog.payload.RegisterDTO;
 import com.springboot.blog.service.AuthService;
@@ -9,6 +10,8 @@ import com.springboot.blog.service.AuthService;
 import io.micrometer.core.ipc.http.HttpSender.Response;
 import jakarta.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +30,11 @@ public class AuthController {
 
 
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<String> postMethodName(@Valid @RequestBody LoginDTO loginDto) {
-        String response = authService.login(loginDto);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<JWTAuthResponse> postMethodName(@Valid @RequestBody LoginDTO loginDto) {
+        String token = authService.login(loginDto);
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        return ResponseEntity.status(HttpStatus.OK).body(jwtAuthResponse);
     }
     
 

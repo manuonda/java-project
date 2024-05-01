@@ -49,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // Create and return a UserDetails object with user information
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), // Username (in this case, email)
+                user.getUsername(), // Username (in this case, email)
                 user.getPassword(), // User's password
                 authorities // Authorities (roles) assigned to the user
         );

@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
-import com.springboot.blog.exception.GlobalExceptionHandler;
+import com.springboot.blog.exception.BlogApiException;
 import com.springboot.blog.payload.LoginDTO;
 import com.springboot.blog.service.AuthService;
 import com.springboot.blog.payload.RegisterDTO;
 import com.springboot.blog.repository.RoleRepository;
 import com.springboot.blog.repository.UserRepository;
+import com.springboot.blog.security.JwtTokenProvider;
 
 /**
  * este código implementa un servicio de autenticación que utiliza Spring
@@ -39,15 +40,17 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private JwtTokenProvider jwtTokenProvider;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
     UserRepository userRepository, RoleRepository roleRepository,
-    PasswordEncoder passwordEncoder) {
+    PasswordEncoder passwordEncoder , JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -63,19 +66,20 @@ public class AuthServiceImpl implements AuthService {
          * aplicación.
          */
         SecurityContextHolder.getContext().setAuthentication(authentication);
+   
+        return this.jwtTokenProvider.generateToken(authentication);
 
-        return "User Logged-in successfully!";
     }
 
     @Override
     public String register(RegisterDTO registerDTO) {
         boolean existUsername = this.userRepository.existsByUsername(registerDTO.getUsername());
         if( existUsername) {
-            throw new GlobalExceptionHandler("Username exists");
+            throw new BlogApiException("Username exists");
         }
         boolean existsEmails = this.userRepository.existsByEmail(registerDTO.getEmail());
         if(existsEmails){
-            throw new GlobalExceptionHandler("Email exists");
+            throw new BlogApiException("Email exists");
         }
 
         User user = new User();
@@ -86,7 +90,7 @@ public class AuthServiceImpl implements AuthService {
 
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName("ROLE_USER")
-        .orElseThrow(() -> new GlobalExceptionHandler("Role no exists"));
+        .orElseThrow(() -> new BlogApiException("Role no exists"));
         roles.add(userRole);
         user.setRoles(roles);
 
