@@ -1,0 +1,9 @@
+spring:
+ application:
+  name: Spring AI RAG
+ ai:
+  openai:
+   api-key: ${OPEN_API_KEY:sk-proj-F66cR3CbvZGapZJcXRF5T3BlbkFJ6cCbdPKHQ4QZ8Ti3BaNm}
+   chat:
+    options:
+     model: gpt-3.5-turbo-0125
