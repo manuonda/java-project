@@ -24,7 +24,7 @@ public class RagConfiguration {
 
 
 
-    @Value("classpath:/docs/olympic-faq.txt")
+    @Value("classpath:/docs/pokemon-faq.txt")
     private Resource faq;
 
     @Value("vectorstore.json")
@@ -45,7 +45,7 @@ public class RagConfiguration {
         } else {
            log.info("Vector Store file does not exists, loading documents");
            TextReader textReader = new TextReader(faq);
-           textReader.getCustomMetadata().put("filename", "olympic-faq.txt");
+           textReader.getCustomMetadata().put("filename", "pokemon-faq.txt");
            List<Document> documents = textReader.get();
            TokenTextSplitter textSplitter = new TokenTextSplitter();
            List<Document> splitDocuments = textSplitter.apply(documents);
