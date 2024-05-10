@@ -54,6 +54,8 @@ public class SecurityConfig {
                         // authorize -> authorize.anyRequest().authenticated()
                         authorize -> authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/v3/api-docs").permitAll()
                                 .anyRequest().authenticated()) // manejador de exceptions de authentication
                 .exceptionHandling(
                         exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
