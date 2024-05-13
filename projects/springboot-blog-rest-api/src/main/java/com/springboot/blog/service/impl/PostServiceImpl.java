@@ -8,6 +8,7 @@ import com.springboot.blog.payload.PostResponseDTO;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,9 +23,12 @@ public class PostServiceImpl implements PostService {
 
 
     private final PostRepository postRepository;
+    private final ModelMapper model;
 
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository , 
+                           ModelMapper modelMapper) {
         this.postRepository = postRepository;
+        this.model = modelMapper;
     }
 
     @Override
@@ -123,6 +127,14 @@ public class PostServiceImpl implements PostService {
         dto.setContent(post.getContent());
         dto.setDescription(post.getDescription());
         return dto;
+    }
+
+    @Override
+    public List<PostDTO> getByIdCategory(Long id) {
+        List<Post> list = this.postRepository.findByIdCategory(id);
+        return list.stream()
+        .map(post ->  this.model.map(post, PostDTO.class))
+        .toList();
     }
 
 }

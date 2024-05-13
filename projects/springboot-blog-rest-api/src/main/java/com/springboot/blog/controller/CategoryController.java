@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.blog.payload.CategoryDTO;
 import com.springboot.blog.service.CategoryService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/v1/categories")
+@Tag(
+    name="Category Controller Rest",
+    description = "Category Controller Rest API"
+)
 public class CategoryController {
 
     private final CategoryService categoryService;

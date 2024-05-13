@@ -1,5 +1,7 @@
 package com.springboot.blog.service;
 
+import java.util.List;
+
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
 
@@ -44,5 +46,13 @@ public interface PostService {
      * @param id
      */
     void deleteById(Long id);
+
+
+    /**
+     * Return List Post by idCategory
+     * @param id
+     * @return
+     */
+    List<PostDTO> getByIdCategory(Long id);
 
 }
