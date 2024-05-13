@@ -10,9 +10,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true      
-  profiles:
-   active: dev
+    show-sql: true
+        
   #flyway:
 
   # security:
@@ -24,7 +23,6 @@ app:
  jwt-secret: 66dd3673ee33b5ac40d660e2b8633b8a91cd04dbf6f7b68e5c9a41431f36ae53  #manuonda
  expiration-time: 809000
 
- 
 
 
 

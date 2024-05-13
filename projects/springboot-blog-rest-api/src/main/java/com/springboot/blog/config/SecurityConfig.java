@@ -22,8 +22,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.springboot.blog.security.JwtAuthenticationEntryPoint;
 import com.springboot.blog.security.JwtAuthenticationFilter;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+
 @Configuration
 @EnableMethodSecurity
+@SecurityScheme(
+    name = "Bear Authentication",
+    type= SecuritySchemeType.HTTP,
+    bearerFormat = "JWT",
+    scheme = "bearer"    
+)
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
@@ -55,7 +64,7 @@ public class SecurityConfig {
                         authorize -> authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers("/v3/api-docs").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
                                 .anyRequest().authenticated()) // manejador de exceptions de authentication
                 .exceptionHandling(
                         exceptionHandling -> exceptionHandling.authenticationEntryPoint(authenticationEntryPoint))
