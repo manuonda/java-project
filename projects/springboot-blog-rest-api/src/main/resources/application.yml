@@ -4,15 +4,15 @@ spring:
   application:
     name: Spring Blog Application
   datasource :
-    url: jdbc:mysql://localhost:3306/my_blog
-    username: root
-    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:my_blog}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true      
-  profiles:
-   active: dev
+  #profiles:
+  # active: dev
   #flyway:
 
   # security:
@@ -23,7 +23,6 @@ spring:
 app:
  jwt-secret: 66dd3673ee33b5ac40d660e2b8633b8a91cd04dbf6f7b68e5c9a41431f36ae53  #manuonda
  expiration-time: 809000
-
  
 
 
