@@ -4,32 +4,18 @@ services:
   database:
     image: mysql:8
     ports:
-      - "3306:3306"
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       retries: 10
       interval: 3s
       timeout: 30s
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/db
       - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
-    networks:
-      - springboot-mysql-network
-
-  spring-blog-app:
-    depends_on:
-      database:
-        condition: service_healthy
-    container_name: spring-blog-app
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    env_file: .env
-    ports:
-      - "8085:8085"
     networks:
       - springboot-mysql-network
 

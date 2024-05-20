@@ -5,6 +5,7 @@ import com.springboot.blog.exception.EntityFoundException;
 import com.springboot.blog.exception.ResourceNotFound;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponseDTO;
+import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 
@@ -24,11 +25,15 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final ModelMapper model;
+    private final CategoryRepository categoryRepository;
 
-    public PostServiceImpl(PostRepository postRepository , 
+
+    public PostServiceImpl(PostRepository postRepository ,
+                           CategoryRepository categoryRepository, 
                            ModelMapper modelMapper) {
         this.postRepository = postRepository;
         this.model = modelMapper;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override

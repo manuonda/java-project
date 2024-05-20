@@ -1,5 +1,6 @@
 package com.springboot.blog.repository;
 
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Post;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +21,10 @@ public class PostTests {
     @Autowired
     private PostRepository postRepository;
 
+ 
+
+
+
     @Test
     @DisplayName("Test Junit Method Save Post")
     public void givenObjectPost_whenSavePost_thenReturnObjectPost() {
@@ -29,6 +34,8 @@ public class PostTests {
         post.setTitle("Title one");
         post.setDescription("Descriptio One");
         post.setContent("Information");
+
+      
 
         // when
         Post postSaved = this.postRepository.save(post);
@@ -126,4 +133,32 @@ public class PostTests {
 
     }
 
+
+    @Test
+    @DisplayName("Test Junit Method Search Query Title")
+    public void givenListPost_whenFindSearchByTitle_thenReturnListPost(){
+       //given
+       
+       Post post = new Post().builder()
+       .title("Titulo numero one")
+       .description("Description numero one")
+       .content("Content number one")
+       .build(); 
+
+       this.postRepository.save(post);
+
+       Post postTwo = new Post().builder()
+       .title("Titulo numero two")
+       .description("Description numero two")
+       .content("Content number two")
+       .build();
+
+       this.postRepository.save(postTwo);
+       //when 
+       List<Post> posts = this.postRepository.searchPost("Titulo");
+
+       //then
+       Assertions.assertThat(posts).isNotNull().isNotEmpty();
+       Assertions.assertThat(posts.size()).isEqualTo(2);
+    }
 }
