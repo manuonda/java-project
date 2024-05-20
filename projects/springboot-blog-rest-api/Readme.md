@@ -22,9 +22,10 @@
 
 
 
-## To execute Project 
+## To execute Project, is necesssary docker. 
 
 ´´´
+ ./docker compose up
 ./mvwn clean install -DskipTests
 ./mvwn spring-boot:run 
 ´´´
