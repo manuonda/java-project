@@ -24,23 +24,22 @@
 
 ## To execute Project, is necesssary docker. 
 
-´´´
+```
  ./docker compose up
 ./mvwn clean install -DskipTests
 ./mvwn spring-boot:run 
-´´´
+```
 
 ### To dockerizar application and Run docker
 The command docker compose up load the docker mysql to connect 
 application database
 
-´´´
+```
 ./mvnw clean install -DskipTests
 ./docker build -t app-blog:1.0 .
 ./docker compose up
 ./docker run -p 8085:8085 app-blog:1.0
-´´´
-
+```
 Navigate to [http://localhost:8085/swagger-ui/index.html](http://localhost:8085/swagger-ui/index.html)
 
 
