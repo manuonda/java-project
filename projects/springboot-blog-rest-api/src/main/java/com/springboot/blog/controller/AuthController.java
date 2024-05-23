@@ -8,6 +8,7 @@ import com.springboot.blog.payload.RegisterDTO;
 import com.springboot.blog.service.AuthService;
 
 import io.micrometer.core.ipc.http.HttpSender.Response;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(
+    name = "Rest Auth Controller",
+    description = "Controller co"
+)
 public class AuthController {
 
     private AuthService authService;
