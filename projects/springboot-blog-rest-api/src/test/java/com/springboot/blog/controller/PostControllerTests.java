@@ -65,23 +65,5 @@ class PostControllerTests {
     }
 
     
-    @Test
-    void getAllPosts() {
-    }
-
-    @Test
-    void getPostById() {
-    }
-
-    @Test
-    void createPost() {
-    }
-
-    @Test
-    void updatePost() {
-    }
-
-    @Test
-    void deletePost() {
-    }
+    
 }
