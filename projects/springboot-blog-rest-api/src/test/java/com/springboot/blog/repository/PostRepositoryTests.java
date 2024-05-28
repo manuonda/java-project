@@ -16,7 +16,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
-public class PostTests {
+public class PostRepositoryTests {
 
     @Autowired
     private PostRepository postRepository;
