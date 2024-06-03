@@ -8,15 +8,26 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class PostRepositoryTestIT extends AbstractBaseContainer {
+//@Testcontainers
+ class PostRepositoryTestIT extends AbstractBaseContainer{
 
     @Autowired
     private PostRepository postRepository;
+
+
+    // @Container
+    // @ServiceConnection
+    // static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8");
+
 
 
     @Test
