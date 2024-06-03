@@ -7,11 +7,8 @@ public abstract class AbstractBaseContainer {
     static final  MySQLContainer mySQLContainer ;
 
     static {
-        mySQLContainer= new MySQLContainer()
-                ; /*.withUsername("root")
-                .withPassword("root")
-                .withDatabaseName("my_blog");
-                */
+        mySQLContainer = new MySQLContainer<>("mysql:8");
+            
         mySQLContainer.start();
     }
 }

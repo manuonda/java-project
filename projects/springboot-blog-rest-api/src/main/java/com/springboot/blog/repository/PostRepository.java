@@ -21,4 +21,35 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "SELECT * FROM posts p WHERE p.title  LIKE  ?1% ", nativeQuery = true)
     List<Post> searchPost(String  title);
 
+    /*
+     * Return Post by find By Id
+     */
+    Optional<Post> findById(Long id);
+
+     /**
+     * Returns the found list of post entries whose title and description is given
+     * as a method parameters. If no post entries is found, this method
+     * returns an empty list.
+     */
+
+    List<Post> findByTitleOrDescription(String title, String description);
+
+      /**
+     * Returns the found list of post entries whose title and description is given
+     * as a method parameters. If no post entries is found, this method
+     * returns an empty list.
+     */
+    List<Post> findByTitleAndDescription(String title, String description);
+
+
+    Post findDistinctByTitle(String title);
+
+    List<Post> findByTitleContaining(String title);
+
+    List<Post> findByTitleLike(String title);
+
+
+    List<Post> findByTitleIn(List<String> titles);
+
+
 }
