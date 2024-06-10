@@ -283,3 +283,52 @@ Vegana Pizza
 
 ### @Bean and @Configuration
 
+**@Bean** and **@Configuration** are annotations in Spring used to define and configure beans in an application. These annotations are primarily used in configuration classes to create and manage beans in an explicit and programmatic way. Here is a detailed explanation of each:
+**@Configuration**
+
+**@Configuration** is an annotation used to mark a class as a source of bean definitions. Classes annotated with @Configuration are treated as configuration classes that can contain methods annotated with @Bean.
+
+Purpose: Indicate that the class contains bean definitions.
+Usage: Placed at the top of the class.
+
+**@Bean** is an annotation used to indicate that a method produces a bean to be managed by the Spring container. Each method annotated with **@Bean** returns an object that is registered as a bean in the Spring context.
+
+Purpose: Define a bean that Spring will manage.
+Usage: Placed above a method within a class annotated with @Configuration.
+
+
+Create class AppConfig.java and Inject the Bean Pizza
+
+```java 
+@Configuration
+public class AppConfig {
+    
+    @Bean
+    public Pizza vegPizza(){
+        return new VegPizza();
+    }
+}
+
+// in the application main java 
+public static void main(String[] args) {
+	var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	 
+	VegPizza vegPizza =  context.getBean(VegPizza.class);
+	System.out.println(vegPizza.getPizza());
+}
+The Output : Vegana Pizza!
+
+```
+Also with name for example 
+
+```java
+@Configuration
+public class AppConfig {
+    
+    @Bean(name="vegPizzaBean")
+    public Pizza vegNameBeanPizza(){
+        return new VegPizza();
+    }
+}
+```
+
