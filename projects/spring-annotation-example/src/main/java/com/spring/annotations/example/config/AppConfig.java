@@ -5,17 +5,18 @@ import org.springframework.context.annotation.Configuration;
 
 import com.spring.annotations.example.services.Pizza;
 import com.spring.annotations.example.services.VegPizza;
+import com.spring.annotations.example.services.VegPizzaBean;
 
 @Configuration
 public class AppConfig {
     
-    @Bean
-    public Pizza vegPizza(){
-        return new VegPizza();
-    }
-
-    // @Bean(name="vegPizzaBean")
-    // public Pizza vegNameBeanPizza(){
-    //     return new VegPizza();
+    // @Bean
+    // public Pizza vegPizzaBean(){
+    //     return new VegPizzaBean();
     // }
+
+    @Bean(name="vegPizzaBean")
+    public Pizza vegNameBeanPizza(){
+        return new VegPizzaBean();
+    }
 }

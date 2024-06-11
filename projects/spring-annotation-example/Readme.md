@@ -296,16 +296,27 @@ Usage: Placed at the top of the class.
 Purpose: Define a bean that Spring will manage.
 Usage: Placed above a method within a class annotated with @Configuration.
 
+Create class VegPizzaBean
+```java
+public class VegPizzaBean implements Pizza {
+
+    public String getPizza(){
+        return "Vegana Pizza Bean!";
+    }
+}
+```
+
 
 Create class AppConfig.java and Inject the Bean Pizza
+
 
 ```java 
 @Configuration
 public class AppConfig {
     
-    @Bean
-    public Pizza vegPizza(){
-        return new VegPizza();
+     @Bean
+    public Pizza vegPizzaBean(){
+        return new VegPizzaBean();
     }
 }
 
@@ -313,10 +324,10 @@ public class AppConfig {
 public static void main(String[] args) {
 	var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
 	 
-	VegPizza vegPizza =  context.getBean(VegPizza.class);
+	VegPizzaBean vegPizza =  context.getBean(VegPizzaBean.class);
 	System.out.println(vegPizza.getPizza());
 }
-The Output : Vegana Pizza!
+The Output : Vegana Pizza Bean!
 
 ```
 Also with name for example 
@@ -327,8 +338,137 @@ public class AppConfig {
     
     @Bean(name="vegPizzaBean")
     public Pizza vegNameBeanPizza(){
-        return new VegPizza();
+        return new VegPizzaBean();
     }
+}
+
+
+public static void main(String[] args) {
+	var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	VegPizzaBean vegPizza2 = (VegPizzaBean) context.getBean("vegPizzaBean");
+	System.out.println(vegPizza2.getPizza());
+}
+
+
+The Output : Vegana Pizza Bean!
+
+```
+
+### @Repository, @Controller and @Service
+
+In Spring, the @Repository, @Service, and @Controller annotations are used to mark classes with specific roles within the layered architecture of an application. These annotations are specializations of **@Component** and help improve code readability and management by clearly indicating the purpose of each class.
+
+* **@Repository**: For the data access layer, interacting with the database.
+* **@Service**: For the business logic layer, processing data and applying business rules.
+* **@Controller**: For the presentation layer, handling HTTP requests and returning responses.
+
+Example ***@Controller***  
+
+```java 
+@Controller
+public class MyController {
+    
+    public String hello(){
+        return "Hello Controller";
+    }
+}
+
+```
+The annotation **@Controller** have annotation **@Component** 
+
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Controller {
+
+	/**
+	 * Alias for {@link Component#value}.
+	 */
+	@AliasFor(annotation = Component.class)
+	String value() default "";
+
 }
 ```
 
+Example **@Service**
+```java
+@Service
+public class MyService {
+    
+    public String myService(){
+        return "My Service";
+    }
+}
+
+```
+The annotation @Service have annotation @Component 
+
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Service {
+
+	/**
+	 * Alias for {@link Component#value}.
+	 */
+	@AliasFor(annotation = Component.class)
+	String value() default "";
+
+}
+```
+Example ***@Repository***:
+```java 
+@Repository
+public class MyRepository {
+    
+  public String myRepository(){
+        return "My Repository";
+  }
+}
+```
+The annotation @Repository have annotation @Component
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Repository {
+
+	/**
+	 * Alias for {@link Component#value}.
+	 */
+	@AliasFor(annotation = Component.class)
+	String value() default "";
+
+}
+```
+
+
+Example output:
+```java
+@SpringBootApplication
+public class DescriptionSpringBootAnnotationApplication {
+
+  public static void main(String[] args) {
+  	 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+     MyController myController= context.getBean(MyController.class);
+  	 System.out.println(myController.hello());  
+  	 MyService myService = context.getBean(MyService.class);
+  	 System.out.println(myService.myService());  
+  	 MyRepository myRepository = context.getBean(MyRepository.class);
+  	 System.out.println(myRepository.myRepository());  
+  
+  }
+
+}
+
+Output: 
+Hello Controller
+My Service
+My Repository
+```
