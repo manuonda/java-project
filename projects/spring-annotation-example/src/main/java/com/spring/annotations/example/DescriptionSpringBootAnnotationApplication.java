@@ -5,10 +5,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.spring.annotations.example.controllers.MyController;
 import com.spring.annotations.example.controllers.PizzaController;
+import com.spring.annotations.example.lazy.LazyLoader;
 import com.spring.annotations.example.repository.MyRepository;
+import com.spring.annotations.example.scope.PrototypeBean;
+import com.spring.annotations.example.scope.SingletonBean;
 import com.spring.annotations.example.services.MyService;
 import com.spring.annotations.example.services.VegPizza;
 import com.spring.annotations.example.services.VegPizzaBean;
+import com.spring.annotations.example.value.ValueAnnotationDemo;
 
 @SpringBootApplication
 public class DescriptionSpringBootAnnotationApplication {
@@ -32,7 +36,28 @@ public class DescriptionSpringBootAnnotationApplication {
 		MyRepository myRepository = context.getBean(MyRepository.class);
 		System.out.println(myRepository.myRepository());
 
-	
+	  
+		LazyLoader lazyLoader = context.getBean(LazyLoader.class);
+
+		SingletonBean singletonBean = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean.hashCode());
+		SingletonBean singletonBean2 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.hashCode());
+		SingletonBean singletonBean3 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean3.hashCode());
+		PrototypeBean prototypeBean = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean.hashCode());
+		PrototypeBean prototypeBean2 = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.hashCode());
+		PrototypeBean prototypeBean3 = context.getBean(PrototypeBean.class);
+        System.out.println(prototypeBean3.hashCode());     
+
+
+		ValueAnnotationDemo valueAnnotationDemo = context.getBean(ValueAnnotationDemo.class);
+		System.out.println(valueAnnotationDemo.getDefaultName());
+		System.out.println(valueAnnotationDemo.getEmailHost());
+		System.out.println(valueAnnotationDemo.getJavaHome());
+		
 	}
 
 }

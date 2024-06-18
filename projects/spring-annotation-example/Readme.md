@@ -472,3 +472,207 @@ Hello Controller
 My Service
 My Repository
 ```
+### @Lazy 
+Lazy Initialization in Spring
+
+Lazy initialization means that a bean will only be created when it is needed. By default, Spring initializes all singleton beans at startup, but you can configure it to create beans only on demand, improving startup time and resource efficiency.
+
+ Esto significa que todos los beans singleton se crean y se inicializan al inicio del contexto de la aplicación. Esto ocurre al arrancar la aplicación, lo que puede incrementar el tiempo de inicio si hay muchos beans o si algunos de ellos son costosos de crear.
+
+
+```java
+
+package com.spring.annotations.example.lazy;
+
+/**
+ * Al inicializar Spring Carga Este
+ * bean en el contexto de Spring
+ * inicializandolo
+ * */ 
+@Component
+public class EagerLoader {
+    
+   public EagerLoader(){
+    System.out.println("EagerLoader...");
+   }
+}
+```
+Carga LazyLoader
+```java
+/**
+ * Bean bajo demanda , no se carga en el contexto 
+ * de Spring.
+ */
+
+@Component
+@Lazy
+public class LazyLoader {
+    
+    public LazyLoader(){
+        System.out.println("LazyLoader...");
+    }
+}
+```
+Inicializamos el bean correspondiente:
+```java 
+@SpringBootApplication
+public class DescriptionSpringBootAnnotationApplication {
+
+	public static void main(String[] args) {
+		 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	  
+		LazyLoader lazyLoader = context.getBean(LazyLoader.class);
+	
+	}
+
+}
+The output: LazyLoader...
+```
+
+
+### @Scope 
+
+The **@Scope** annotation in Spring is a powerful tool for managing the lifecycle of beans in your application. By choosing the appropriate scope, you can optimize resource usage and state management in your application.
+
+
+Here is a summary of the different types of scopes in Spring:
+
+* Singleton:
+        Description: Default scope. Only one instance per Spring container.
+        Usage: Ideal for stateless beans or shared state.
+* Prototype:
+        Description: A new instance is created each time the bean is requested.
+        Usage: Suitable for stateful beans that should not be shared.
+
+* Request (Web applications only):
+        Description: A new instance is created for each HTTP request.
+        Usage: Useful for beans specific to a single HTTP request.
+
+* Session (Web applications only):
+        Description: A new instance is created for each HTTP session.
+        Usage: Useful for beans that should last for an entire user session.
+
+* Application (Web applications only):
+        Description: A single instance per servlet context.
+        Usage: Suitable for beans shared across the entire application.
+
+* WebSocket (Web applications only):
+        Description: A new instance for each WebSocket session.
+        Usage: Useful for beans that should last for the duration of a WebSocket session.
+
+Example SingletonBean.java
+```java
+
+@Component
+@Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class SingletonBean {
+    
+    public SingletonBean(){
+        System.out.println("SingletonBean...");
+    }
+}
+```
+Example Scope PrototypeBean
+```java
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class PrototypeBean {
+    
+    public PrototypeBean(){
+        System.out.println("PrototypeBean...");
+    }
+}
+```
+
+```java
+
+	public static void main(String[] args) {
+		 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+
+		SingletonBean singletonBean = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean.hashCode());
+		SingletonBean singletonBean2 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.hashCode());
+		SingletonBean singletonBean3 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean3.hashCode());
+		PrototypeBean prototypeBean = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean.hashCode());
+		PrototypeBean prototypeBean2 = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.hashCode());
+		PrototypeBean prototypeBean3 = context.getBean(PrototypeBean.class);
+        System.out.println(prototypeBean3.hashCode());     
+
+	}
+
+The output: SingletonBean is only one time is executed
+SingletonBean...
+1108106766
+1108106766
+1108106766
+PrototypeBean...
+1568061605
+PrototypeBean...
+2099933483
+PrototypeBean...
+1578770446
+
+```
+
+### @Value 
+The **@Value** annotation in Spring is used to inject values into fields, methods, and constructors in your Spring-managed beans. These values can come from various sources, such as properties files, system properties, environment variables, or even directly specified strings.
+
+
+Example 
+application.properties add:
+```java
+email.host=manuonda@gmail.com
+```
+Bean ValueAnnotationDemo
+```java 
+@Component
+public class ValueAnnotationDemo {
+    
+
+    @Value("Default Name")
+    private String defaultName;
+
+    //default value
+    @Value("${email.host:andres@gmail.com}")
+    private String emailHost;
+
+    //variable environment
+    @Value("${java.home}")
+    private String javaHome;
+
+
+    public String getEmailHost() {
+        return emailHost;
+    }
+
+    public String getDefaultName(){
+        return defaultName;
+    }
+
+    public String getJavaHome() {
+        return javaHome;
+    }
+}
+
+
+   // Execute Bean
+	public static void main(String[] args) {
+		 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	
+		ValueAnnotationDemo valueAnnotationDemo = context.getBean(ValueAnnotationDemo.class);
+		System.out.println(valueAnnotationDemo.getDefaultName());
+		System.out.println(valueAnnotationDemo.getEmailHost());
+		System.out.println(valueAnnotationDemo.getJavaHome());
+		
+	}
+
+    The Output: 
+    Default Name
+    manuonda@gmail.com
+    /usr/lib/jvm/java-17-openjdk-amd64
+
+```
