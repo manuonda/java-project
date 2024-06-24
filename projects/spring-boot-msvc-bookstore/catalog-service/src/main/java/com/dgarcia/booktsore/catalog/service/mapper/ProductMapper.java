@@ -5,7 +5,7 @@ import com.dgarcia.booktsore.catalog.entity.dto.ProductRecord;
 
 public class ProductMapper {
 
-    static ProductRecord toProductRecord(Product product) {
+    public static ProductRecord toProductRecord(Product product) {
         return new ProductRecord(
                 product.getId(),
                 product.getCode(),

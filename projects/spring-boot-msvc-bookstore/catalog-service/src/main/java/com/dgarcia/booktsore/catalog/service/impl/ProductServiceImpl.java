@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dgarcia.booktsore.catalog.config.ApplicationProperties;
 import com.dgarcia.booktsore.catalog.entity.domain.Product;
 import com.dgarcia.booktsore.catalog.entity.dto.PagedResult;
 import com.dgarcia.booktsore.catalog.entity.dto.ProductDTO;
@@ -27,10 +28,12 @@ public class ProductServiceImpl implements ProductService {
     private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private final ProductRepository productRepository;
-    
+    private final ApplicationProperties    properties;
    
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,
+       ApplicationProperties    properties) {
         this.productRepository = productRepository;
+        this.   properties =    properties;
     }
 
     @Override
@@ -39,13 +42,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> findAll(int PageNo) {
-        Sort sort = Sort.by("name").ascending();
-        Pageable pageable = PageRequest.of(PageNo, 10,sort);
-        final Page<ProductRecord> productsPage = this.productRepository.findAll(pageable)
+    public PagedResult<ProductRecord> findAll(int pageNo) {
+        final Sort sort = Sort.by("name").ascending();
+        pageNo = pageNo <= 1 ? 0: pageNo -1;
+        Pageable pageable = PageRequest.of(pageNo, properties.pageSize(),sort);
+        Page<ProductRecord> productsPage = this.productRepository
+        .findAll(pageable)
         .map(ProductMapper::toProductRecord);
 
-        PagedResult<ProductDT> pagedResult = new PagedResult<>
+        return new PagedResult<>
         (productsPage.getContent(), 
         productsPage.getTotalElements(), 
         productsPage.getNumber(), 
@@ -55,7 +60,6 @@ public class ProductServiceImpl implements ProductService {
         productsPage.hasNext(),
         productsPage.hasPrevious()); 
 
-        return null;
     }
 
 
@@ -69,6 +73,11 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO update(Long id, ProductDTO dto) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+
+    private ProductRecord toRecord(Product product){
+        return new ProductRecord(product.getId(), product.getCode(), product.getName(), product.getDescription(), product.getImageUrl(), product.getPrice());
     }
 
 }
