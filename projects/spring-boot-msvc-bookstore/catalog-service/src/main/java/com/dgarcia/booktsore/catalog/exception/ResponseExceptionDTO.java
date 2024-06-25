@@ -1,4 +1,4 @@
-package com.dgarcia.booktsore.catalog.entity.dto;
+package com.dgarcia.booktsore.catalog.exception;
 
 public record ResponseExceptionDTO(
     String message, int status
