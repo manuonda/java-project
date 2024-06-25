@@ -13,6 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalException extends ResponseEntityExceptionHandler{
 
    
+    /**
+     *Logger 
+     */
     private Logger logger = LoggerFactory.getLogger(GlobalException.class);
 
 
