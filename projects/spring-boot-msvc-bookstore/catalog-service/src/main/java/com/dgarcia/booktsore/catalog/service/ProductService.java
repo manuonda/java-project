@@ -30,4 +30,7 @@ public interface ProductService {
      * @param id
      */
     void delete(Long id);
+
+
+    ProductRecord findByCode(String code);
 }

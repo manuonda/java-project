@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +42,7 @@ public class Product {
     private String imageUrl;
 
     @Column(nullable = false)
-    @NotEmpty(message = "Product price is required")
+    @NotNull(message = "Product  price is required")
     @DecimalMin("0.1")
     private Double price;
 

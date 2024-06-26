@@ -2,6 +2,7 @@ package com.dgarcia.booktsore.catalog.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import com.dgarcia.booktsore.catalog.entity.domain.Product;
 import com.dgarcia.booktsore.catalog.entity.dto.PagedResult;
 import com.dgarcia.booktsore.catalog.entity.dto.ProductDTO;
 import com.dgarcia.booktsore.catalog.entity.dto.ProductRecord;
+import com.dgarcia.booktsore.catalog.exception.ResourceNotFound;
 import com.dgarcia.booktsore.catalog.repository.ProductRepository;
 import com.dgarcia.booktsore.catalog.service.ProductService;
 import com.dgarcia.booktsore.catalog.service.mapper.ProductMapper;
@@ -28,12 +30,13 @@ public class ProductServiceImpl implements ProductService {
     private Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private final ProductRepository productRepository;
-    private final ApplicationProperties    properties;
+    private final ApplicationProperties  properties;
+
    
     public ProductServiceImpl(ProductRepository productRepository,
-       ApplicationProperties    properties) {
+       ApplicationProperties    properties ) {
         this.productRepository = productRepository;
-        this.   properties =    properties;
+        this.properties =    properties;
     }
 
     @Override
@@ -76,8 +79,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    private ProductRecord toRecord(Product product){
-        return new ProductRecord(product.getId(), product.getCode(), product.getName(), product.getDescription(), product.getImageUrl(), product.getPrice());
+    @Override
+    public ProductRecord findByCode(String code) {
+       Product  product = this.productRepository.findByCode(code)
+       .orElseThrow(() -> new ResourceNotFound("Product Not Found"));
+   
+       ProductRecord productRecord = null;
+       productRecord = ProductMapper.toProductRecord(product);
+       return productRecord;
     }
 
 }
