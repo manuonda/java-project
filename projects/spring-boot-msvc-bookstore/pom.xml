@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
     <name>spring-boot-mscv-course</name>
-	<description>Spring Boot Project Microservice Course </description>
+	<description>Spring Boot Project Microservice Course Bookstore </description>
 	
     
     <properties>

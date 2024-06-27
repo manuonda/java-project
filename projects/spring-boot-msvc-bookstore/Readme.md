@@ -76,7 +76,7 @@ For detailed instructions on running and testing each module, refer to their res
 
 ### Course commands
 
-Create file pom.xml , to create file run the next command:
+Create file pom.xml this file is that contain  , to create file run the next command:
 ```java
 mvn wrapper:wrapper
 ```
@@ -95,5 +95,33 @@ mvn wrapper:wrapper
   ```
   * **[SdkMan](https://sdkman.io/)** 
   Se crea un archivo sdkmanrc para permitir cargar la version requerida de java. Create file **.sdkmanrc**
-  https://www.baeldung.com/java-sdkman-intro
+  ```java
+  java=21.0.3-tem
+  maven=3.6.3
+  ```
+   [Tutorial skdman ](https://www.baeldung.com/java-sdkman-intro)
+
+
+  * **[Create image builder](https://docs.spring.io/spring-boot/maven-plugin/build-image.html#build-image.customization)**:
+  To create an image docker, I first need to create the image in `Docker-Hub`. In this case is for catalog-service so, the name of the image in `docker-hub` is: **`manuonda/bookstore-catalog-service`**
+
+  The configuration of the file pom.xml is:
+  ```java
+  <configuration>
+		<image>
+		<name>${dockerImageName}</name>
+		</image>
+  </configuration> 
+  ```
+  
+  The commando to create builder is the next command :
+  ```java
+   ./mvnw -pl catalog-service spring-boot:build-image -DskipTests
+  ```
+The command does the following:
+
+- Runs the Maven Wrapper (`mvwn`) to ensure the correct Maven version.
+- `-pl catalog-service`: The -pl (short for "project list") option specifies that the command should only be executed on the catalog-service submodule of the project. This is useful if the project has multiple modules and you want to run a command on a specific module.
+- Executes the Spring Boot plugin goal `builder-image` to create a container image.
+- Skips running tests (`-DskipTests`).
 
