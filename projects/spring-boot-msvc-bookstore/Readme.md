@@ -125,3 +125,6 @@ The command does the following:
 - Executes the Spring Boot plugin goal `builder-image` to create a container image.
 - Skips running tests (`-DskipTests`).
 
+
+**Note**: Configure docker hub credentials in github for integrate with `github actions`.
+
