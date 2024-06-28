@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class GlobalException extends ResponseEntityExceptionHandler{
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
     private static final URI NOT_FOUND_TYPE = URI.create("https://api.bookstore.com/errors/not-found");
     private static final URI ISE_FOUND_TYPE = URI.create("https://api.bookstore.com/errors/server-error");
@@ -25,7 +25,7 @@ public class GlobalException extends ResponseEntityExceptionHandler{
     /**
      *Logger 
      */
-    private Logger logger = LoggerFactory.getLogger(GlobalException.class);
+    private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 
     // @ExceptionHandler(ResourceNotFound.class)
