@@ -36,8 +36,18 @@ public class ProductController {
 
     @GetMapping("/code/{code}")
     public ResponseEntity<ProductRecord> getByCode(@PathVariable("code") String param) {
+       // sleep();
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findByCode(param));
     }
     
 
+    // void sleep() {
+    //     try {
+    //         Thread.sleep(6000);
+    //    }catch(InterruptedException ex){
+    //        System.out.println(ex.getLocalizedMessage());
+    //    }
+   
+    // }
+    
 }

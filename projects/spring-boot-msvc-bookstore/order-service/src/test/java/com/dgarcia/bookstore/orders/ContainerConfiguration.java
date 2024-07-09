@@ -1,4 +1,4 @@
-package com.dgarcia.bookstore.orderservice;
+package com.dgarcia.bookstore.orders;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

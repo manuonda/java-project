@@ -1,0 +1,39 @@
+package com.dgarcia.bookstore.orders.service.validator;
+
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.dgarcia.bookstore.orders.client.Product;
+import com.dgarcia.bookstore.orders.client.ProductServiceClient;
+import com.dgarcia.bookstore.orders.domain.models.CreateOrderRequest;
+import com.dgarcia.bookstore.orders.domain.models.OrderItem;
+import com.dgarcia.bookstore.orders.exception.InvalidOrderException;
+
+@Component
+public class OrderValidator {
+    private static final Logger log = LoggerFactory.getLogger(OrderValidator.class);
+
+    private final ProductServiceClient client;
+
+    OrderValidator(ProductServiceClient client) {
+        this.client = client;
+    }
+
+    public void validate(CreateOrderRequest request) {
+        Set<OrderItem> items = request.items();
+        for (OrderItem item : items) {
+            Product product = client.getProductByCode(item.code())
+                    .orElseThrow(() -> new InvalidOrderException("Invalid Product code:" + item.code()));
+            if (item.price().compareTo(product.price()) != 0) {
+                log.error(
+                        "Product price not matching. Actual price:{}, received price:{}",
+                        product.price(),
+                        item.price());
+                throw new InvalidOrderException("Product price not matching");
+            }
+        }
+    }
+}
