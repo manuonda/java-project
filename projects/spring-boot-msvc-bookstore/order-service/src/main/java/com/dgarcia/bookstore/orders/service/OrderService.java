@@ -48,7 +48,10 @@ public class OrderService {
     }
 
     public List<OrderSummary> findOrders(String userName) {
-        return orderRepository.findByUserName(userName);
+        List<OrderSummary> orders =  orderRepository.findByUserName(userName);
+        return orders.stream()
+                     .map( order -> new OrderSummary(order.orderNumber(), order.status()))
+                     .toList();
     }
 
     public Optional<OrderDTO> findUserOrder(String userName, String orderNumber) {
