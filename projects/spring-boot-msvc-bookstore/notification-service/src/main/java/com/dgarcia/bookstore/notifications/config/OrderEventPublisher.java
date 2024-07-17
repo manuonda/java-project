@@ -1,13 +1,13 @@
-package com.dgarcia.bookstore.orders.config;
+package com.dgarcia.bookstore.notifications.config;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Component;
 
-import com.dgarcia.bookstore.orders.ApplicationProperties;
-import com.dgarcia.bookstore.orders.domain.models.OrderCancelledEvent;
-import com.dgarcia.bookstore.orders.domain.models.OrderCreatedEvent;
-import com.dgarcia.bookstore.orders.domain.models.OrderDeliveredEvent;
-import com.dgarcia.bookstore.orders.domain.models.OrderErrorEvent;
+import com.dgarcia.bookstore.notifications.ApplicationProperties;
+import com.dgarcia.bookstore.notifications.domain.models.OrderCancelledEvent;
+import com.dgarcia.bookstore.notifications.domain.models.OrderCreatedEvent;
+import com.dgarcia.bookstore.notifications.domain.models.OrderDeliveredEvent;
+import com.dgarcia.bookstore.notifications.domain.models.OrderErrorEvent;
 
 
 

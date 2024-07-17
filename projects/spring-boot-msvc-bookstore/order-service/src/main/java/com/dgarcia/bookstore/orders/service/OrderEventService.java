@@ -85,6 +85,7 @@ public class OrderEventService {
     /**
      * Metodo que permite leer los event orders
      * de la base de datos e invocar al metodo para publicarlos
+     * y eliminar el evento que se publico de la base  de datos
      */
     public void publishOrderEvents() {
         Sort sort = Sort.by("createdAt").ascending();

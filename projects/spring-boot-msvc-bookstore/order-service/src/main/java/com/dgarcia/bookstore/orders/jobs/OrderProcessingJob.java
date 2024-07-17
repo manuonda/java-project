@@ -23,7 +23,8 @@ public class OrderProcessingJob {
 
     /**
      * Job que permite correr cada 10 segundos 
-     * para obtener la informacion 
+     * para obtener la informacion y procesarla guardando aquellos 
+     * ordens que estan esta estado nuevo 
      */
     @Scheduled(cron ="${orders.new-orders-job-cron}")
     public void processNewOrders(){

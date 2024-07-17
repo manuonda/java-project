@@ -25,7 +25,8 @@ public class OrderEventsPublishingJob {
 
     /**
      * Job que permite leer la informacion 
-     * de la base de datos cada 5 segundos
+     * de la base de datos cada 5 segundos publicando 
+     * los eventos en la cola de rabbitmq
      */
     @Scheduled(cron = "${orders.publish-order-events-job-cron}")
     public void publishOrderEvents(){
