@@ -1,4 +1,4 @@
-package com.dgarcia.bookstore.orders.config;
+package com.dgarcia.bookstore.notifications.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -57,6 +57,10 @@ public class OrderService {
                 .map(OrderMapper::convertToDTO);
     }
 
+    /**
+     * Busca aquellas ordenes en status New 
+     * para procesarlas
+     */
     public void processNewOrders() {
         List<OrderEntity> orders = orderRepository.findByStatus(OrderStatus.NEW);
         log.info("Found {} new orders to process", orders.size());
@@ -65,6 +69,11 @@ public class OrderService {
         }
     }
 
+    /*
+     * Procesa la informacion, actualizando el status 
+     * de la orden y ademas guardando en la tabla evento 
+     * la informacion
+     */
     private void process(OrderEntity order) {
         try {
             if (canBeDelivered(order)) {

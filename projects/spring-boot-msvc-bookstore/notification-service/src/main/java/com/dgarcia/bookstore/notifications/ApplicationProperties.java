@@ -8,6 +8,7 @@ public record ApplicationProperties(
     String newOrdersQueue,
     String deliveredOrdersQueue,
     String cancelledOrdersQueue,
-    String errorOrdersQueue) {
+    String errorOrdersQueue,
+    String supportEmail) {
 
 }
