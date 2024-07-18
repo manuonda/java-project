@@ -21,10 +21,12 @@ public class ClientDemoController {
         .build();
     }
 
-    @GetMapping("demo-service")
-    public void getMethodName(@RequestParam String param) throws InterruptedException {
-        Thread.sleep(3000); //3 seconds
-        log.info("Blocking for 3 seconds");
+    @GetMapping("client")
+    public String getMethodName(@RequestParam String param) throws InterruptedException {
+      log.info("Request thread {} - {} ", Thread.currentThread().threadId(), Thread.currentThread().getName());
+      this.restClient.get().uri("/demo-service").retrieve().toBodilessEntity();
+      log.info("Request thread {} - {} ", Thread.currentThread().threadId(), Thread.currentThread().getName());
+      return Thread.currentThread().toString();
     }
     
 }
