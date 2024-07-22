@@ -71,7 +71,7 @@ public class OrderService {
 
     /*
      * Procesa la informacion, actualizando el status 
-     * de la orden y ademas guardando en la tabla evento 
+     * de la orden y ademas guardando en la tabla order-evento
      * la informacion
      */
     private void process(OrderEntity order) {
