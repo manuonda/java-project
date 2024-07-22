@@ -2,10 +2,10 @@ package com.dgarcia.bookstore.notifications.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import com.dgarcia.bookstore.notifications.domain.entity.OrderEventEntity;
 import com.dgarcia.bookstore.notifications.domain.models.OrderCancelledEvent;
 import com.dgarcia.bookstore.notifications.domain.models.OrderCreatedEvent;
 import com.dgarcia.bookstore.notifications.domain.models.OrderDeliveredEvent;
@@ -28,27 +28,51 @@ public class OrderEventHandler {
     }
 
     @RabbitListener(queues = "${notifications.new-orders-queue}")
-    void handleOrderCreatedEvent(OrderCreatedEvent orderCreatedEvent){
-        logger.info("handleOrderCreatedEvent : {}", orderCreatedEvent.toString());
-        this.notificationService.sendOrderCreatedNotification(orderCreatedEvent);
+    void handleOrderCreatedEvent(OrderCreatedEvent event){
+        logger.info("handleevent : {}", event.toString());
+        if(orderEventRepository.existsByEventId(event.eventId())){
+            logger.warn("Receive duplicated OrderCreatedEvent with eventId : "+event.eventId());
+            return;
+        }
+        this.notificationService.sendOrderCreatedNotification(event);
+        OrderEventEntity orderEvent = new OrderEventEntity(event.eventId());
+        orderEventRepository.save(orderEvent);
     }
 
     @RabbitListener(queues = "${notifications.delivered-orders-queue}")
     void handleOrderDeliveredEvent(OrderDeliveredEvent event){
-        logger.info("handleOrderCreatedEvent : {}", event.toString());
+        logger.info("handleOrderDeliveredEvent : {}", event.toString());
+        if(orderEventRepository.existsByEventId(event.eventId())){
+            logger.warn("Receive duplicated OrderDeliveredEvent with eventId : "+event.eventId());
+            return;
+        }
         this.notificationService.sendOrderDeliveredNotification(event);
+        OrderEventEntity orderEvent = new OrderEventEntity(event.eventId());
+        orderEventRepository.save(orderEvent);
     }
 
 
     @RabbitListener(queues = "${notifications.cancelled-orders-queue}")
     void handleOrderCancelledEvent(OrderCancelledEvent event){
         logger.info("handleOrderCancelledEvent : {}", event.toString());
+        if(orderEventRepository.existsByEventId(event.eventId())){
+            logger.warn("Receive duplicated OrderCancelledEvent with eventId : "+event.eventId());
+            return;
+        }
         this.notificationService.sendOrderCancelledNotification(event);
+        OrderEventEntity orderEvent = new OrderEventEntity(event.eventId());
+        orderEventRepository.save(orderEvent);
     }
 
     @RabbitListener(queues = "${notifications.error-orders-queue}")
     void handleOrderErrorEvent(OrderErrorEvent event){
-        logger.info("handleOrderCancelledEvent : {}", event.toString());
+        logger.info("handle order Error event : {}", event.toString());
+        if(orderEventRepository.existsByEventId(event.eventId())){
+            logger.warn("Receive duplicated OrderErrorEvent with eventId : "+event.eventId());
+            return;
+        }
         this.notificationService.sendOrderErrorEventNotification(event);
+        OrderEventEntity orderEvent = new OrderEventEntity(event.eventId());
+        orderEventRepository.save(orderEvent);
     }
 }

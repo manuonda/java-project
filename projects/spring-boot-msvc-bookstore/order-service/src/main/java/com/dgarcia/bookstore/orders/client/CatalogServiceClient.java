@@ -11,6 +11,7 @@ import com.dgarcia.bookstore.orders.ApplicationProperties;
 
 /**
  * Configuration Rest Client 
+ * para llamar a la url base de catalogo
  */
 @Configuration
 class CatalogServiceClientConfig {

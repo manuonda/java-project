@@ -20,9 +20,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Table(name="order_events")
 public class OrderEventEntity {
@@ -40,5 +40,9 @@ public class OrderEventEntity {
 
     @Column(name="updated_at", nullable =  true, updatable =  false)
     private LocalDateTime updatedAt;
+
+    public OrderEventEntity(String idEvent){
+        this.eventId = idEvent;
+    }
 
 }
