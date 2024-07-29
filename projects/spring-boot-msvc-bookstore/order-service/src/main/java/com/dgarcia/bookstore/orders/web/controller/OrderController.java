@@ -28,7 +28,7 @@ import com.dgarcia.bookstore.orders.service.SecurityService;
 
 @RestController
 @RequestMapping("/api/v1/orders")
-@SecurityRequirement(name = "security_auth")
+//@SecurityRequirement(name = "security_auth")
 @Tag(name = "Order Controller Rest" , description = "Order Controller to allow create orders and get items")
 class OrderController {
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
