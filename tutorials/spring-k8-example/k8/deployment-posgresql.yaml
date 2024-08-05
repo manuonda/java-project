@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+        tier: database
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          env:
+            - name: DB_USERNAME
+              valueFrom: 
+               secretKeyRef:
+                 key: dbName
+                 name: db-config 
+            - name: DB_PASSWORD
+              valueFrom:
+               secretKeyRef:
+                 key: username
+                 name: posgresql-secret
+            - name: POSTGRES_PASSWORD
+              value: mypassword
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresql-storage
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+      volumes:
+        - name: postgresql-storage
+          persistentVolumeClaim:
+            claimName: postgresql-pv-claim
+
+---
+# Define a 'Service' To Expose mysql to Other Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-svc  # DNS name
+  labels:
+    app: postgresql-svc
+    tier: database
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:       # mysql Pod Should contain same labels
+    app: postgresql
+    tier: database
+  clusterIP: None  # We Use DNS, Thus ClusterIP is not relevant
