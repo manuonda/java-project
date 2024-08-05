@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: springboot-crud-svc
+  name: springboot-crud-svc
+spec:
+  ports:
+  - name: 8081-8081
+    port: 8081  #The port that service is running on in the cluster
+    protocol: TCP
+    targetPort: 8081 #The port expose by the service
+  selector:
+    app: springboot-k8s
+  type: NodePort
+status:
+  loadBalancer: {}
