@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-crud-deployment
+spec:
+  selector:
+    matchLabels:
+      app: springboot-k8s
+  replicas: 3 
+  template:
+    metadata:
+      labels:
+        app: springboot-k8s
+    spec:
+      containers:
+      - name: springboot-k8s
+        image: manuonda/spring8k:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081
+        env: #Setting environmental Variables
+        - name: DB_HOST  # Settings database host address from configMap
+          valueFrom:
+           configMapKeyRef:
+             name: db-config
+             key: host
+        - name: DB_NAME
+          valueFrom:   #Settings Database fron confiMap
+           configMapKeyRef:
+             key: dbName
+             name: db-config
+        - name: DB_USERNAME  #Settings Database username from Secret
+          valueFrom:
+            secretKeyRef:
+              name: posgresql-secret
+              key: username
+        - name: DB_PASSWORD #Settings Database password from secret 
+          valueFrom:
+            secretKeyRef:
+             name: posgresql-secret
+             key: password   
+          

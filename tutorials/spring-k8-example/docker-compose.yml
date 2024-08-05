@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  springk8example:
+    image: springk8example
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8081
