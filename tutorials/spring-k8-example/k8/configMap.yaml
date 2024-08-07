@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: db-config
 data:
-  host: mysql
+  host: postgresql-svc  # corresponde to svc of postgresql
   dbName: postgres

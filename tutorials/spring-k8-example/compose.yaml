@@ -7,9 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: spring-example
     environment:
+      - DB_NAME=postgres
       - DB_URL=jdbc:postgresql://postgres:5432/postgres
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
+      - DB_HOST=postgresq
+      - DB_PORT=5432
     ports:
       - '8081:8081'
     restart: unless-stopped

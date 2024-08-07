@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: springboot-k8s
-  replicas: 3 
+  replicas: 1 
   template:
     metadata:
       labels:
@@ -14,11 +14,13 @@ spec:
     spec:
       containers:
       - name: springboot-k8s
-        image: manuonda/spring8k:latest
+        image: manuonda/spring8k:1.0
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
+          requests:
+            memory: "512Mi"
         ports:
         - containerPort: 8081
         env: #Setting environmental Variables
@@ -35,11 +37,32 @@ spec:
         - name: DB_USERNAME  #Settings Database username from Secret
           valueFrom:
             secretKeyRef:
-              name: posgresql-secret
+              name: postgresql-secret
               key: username
         - name: DB_PASSWORD #Settings Database password from secret 
           valueFrom:
             secretKeyRef:
-             name: posgresql-secret
+             name: postgresql-secret
              key: password   
+        - name: DB_PORT
+          value: "5432"
           
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: springboot-crud-svc
+  name: springboot-crud-svc
+spec:
+  ports:
+  - name: 8081-8081
+    port: 8081  #The port that service is running on in the cluster
+    protocol: TCP
+    targetPort: 8081 #The port expose by the service
+  selector:
+    app: springboot-k8s
+  type: NodePort
+status:
+  loadBalancer: {}
