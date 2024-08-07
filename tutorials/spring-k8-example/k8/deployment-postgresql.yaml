@@ -19,18 +19,23 @@ spec:
           ports:
             - containerPort: 5432
           env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+               secretKeyRef:
+                 key: password
+                 name: postgresql-secret
+            - name: DB_URL
+              value: "jdbc:postgresql://postgresql:5432/postgres"
             - name: DB_USERNAME
               valueFrom: 
                secretKeyRef:
-                 key: dbName
-                 name: db-config 
+                 key: username
+                 name: postgresql-secret
             - name: DB_PASSWORD
               valueFrom:
                secretKeyRef:
-                 key: username
-                 name: posgresql-secret
-            - name: POSTGRES_PASSWORD
-              value: mypassword
+                 key: password
+                 name: postgresql-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgresql-storage
@@ -57,9 +62,25 @@ metadata:
     tier: database
 spec:
   ports:
-    - port: 3306
-      targetPort: 3306
+    - port: 5432
+      targetPort: 5432
   selector:       # mysql Pod Should contain same labels
     app: postgresql
     tier: database
   clusterIP: None  # We Use DNS, Thus ClusterIP is not relevant
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-pv-claim # name of pvc essential for identifying the storage data
+spec:
+  resources:
+    requests:
+      storage: 1Gi  #this will tell kubernetes about the amount of space we are trying to claim
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce #This specifies the mode of the claim that we are trying to create.
+
+  
