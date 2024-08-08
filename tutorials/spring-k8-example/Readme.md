@@ -52,7 +52,21 @@ kubectl logs postgresql-deployment-594ddcc9df-blbm6
 kubectl apply -f deployment.yaml
 ```
 
+### Comands show service and connect to minikube 
+```
+$ kubectl get svc
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes            ClusterIP   10.96.0.1       <none>        443/TCP          43d
+postgresql-svc        ClusterIP   None            <none>        5432/TCP         21h
+springboot-crud-svc   NodePort    10.107.55.194   <none>        8081:32027/TCP   21h
 
+
+$ minikube ip
+192.168.49.2
+$ curl http://192.168.49.2:32027/api/v1/orders
+[]
+
+```
 
 
 
