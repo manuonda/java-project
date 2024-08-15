@@ -10,4 +10,11 @@ class BookServiceApplicationTests {
 	void contextLoads() {
 	}
 
+
+
+	@Test
+	public void throwSneakyIOExceptionUsingLombok_IOExceptionShouldBeThrown(){
+		
+	}
+
 }
