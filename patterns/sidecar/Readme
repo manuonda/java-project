@@ -19,6 +19,12 @@ This additional component, known as a **"sidecar,"** runs in the same environmen
 
 
 
+```
+./mvnw clean install -D skipTests
+```
+
+
+
 ### Links
 [Demystifying Kubernetes Sidecar: Enhancing Microservices Architecture](https://medium.com/@extio/demystifying-kubernetes-sidecar-enhancing-microservices-architecture-c4fe40585c05)
 
