@@ -18,6 +18,11 @@ This additional component, known as a **"sidecar,"** runs in the same environmen
  **Caching and Content Delivery**: Sidecar containers can provide caching functionality by utilizing solutions like Redis or Memcached. They can cache frequently accessed data, reducing the load on the main application and improving response times.
 
 
+### Run Application 
+
+### Create
+
+In wich folder  **/book-service**  and  **/logging-service** run the next command to create
 
 ```
 ./mvnw clean install -D skipTests

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: combined-service
+spec:
+  selector:
+    matchLabels:
+      app: combined-service
+  template:
+    metadata:
+      labels:
+        app: combined-service
+    spec:
+      containers:
+      - name: book-service
+        image: manuonda/sidecar-pattern-book-service
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+         - name : log-name
+           mountPath: /logs
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081
+      - name: sidecar-service
+        image: manuonda/sidecar-loggin-service
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+         - name: log-name
+           mountPath: /logs
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports: 
+          - containerPort: 8082
+      volumes: 
+        - name : log-volume
+          emptyDir: {}  
+      
