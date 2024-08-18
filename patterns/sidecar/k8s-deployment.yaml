@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: combined-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: combined-service
@@ -13,30 +14,29 @@ spec:
     spec:
       containers:
       - name: book-service
-        image: manuonda/sidecar-pattern-book-service
+        image: manuonda/pattern-sidecar-book-service:latest
         imagePullPolicy: IfNotPresent
         volumeMounts:
-         - name : log-name
+         - name: log-volume
            mountPath: /logs
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
       - name: sidecar-service
-        image: manuonda/sidecar-loggin-service
+        image: manuonda/pattern-sidecar-logging-service:4.0
         imagePullPolicy: IfNotPresent
         volumeMounts:
-         - name: log-name
+         - name: log-volume
            mountPath: /logs
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports: 
-          - containerPort: 8082
+          - containerPort: 8081
       volumes: 
-        - name : log-volume
-          emptyDir: {}  
-      
+        - name: log-volume
+          emptyDir: {}

@@ -1,7 +1,9 @@
 package com.pattern.sidecar.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.nio.file.Files;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ public class LogginService {
 
     private static final Logger log =  LoggerFactory.getLogger(LogginService.class);
 
-    public static final String LOG_FILE_PATH =" /logs/book-service.log";
+    public static final String LOG_FILE_PATH ="/logs/book-service.log";
     
     LogginService(){
         log.info("Logging Service initialized...");
@@ -28,7 +30,7 @@ public class LogginService {
         while((line = reader.readLine()) != null ) {
             // Simulate  pushing logs to a centralized system
             // -> splunk, ELK, ES
-            log.info("Processing log : " ,line);
+            log.info("Processing log :{} " , line);
         }
      } catch (Exception e) {
         log.error("error{}", e.getMessage());

@@ -6,5 +6,9 @@ spec:
   selector:
     app: combined-service
   ports:
-  - port: 80
-    targetPort: 8081
+    - name: book-service-port
+      port: 80
+      targetPort: 8080  # Para book-service
+    - name: sidecar-service-port
+      port: 81
+      targetPort: 8081  # Para sidecar-service
