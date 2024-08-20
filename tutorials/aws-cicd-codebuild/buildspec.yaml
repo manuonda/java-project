@@ -1,6 +1,9 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      java: corretto17  # Opción para usar Java 17
   pre_build:
     commands:
       - cd tutorials/aws-cicd-codebuild   # Cambiar al subdirectorio con el pom.xml
