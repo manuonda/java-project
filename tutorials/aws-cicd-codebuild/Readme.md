@@ -103,3 +103,9 @@ Add pòrt 8081 to run application
 
 4.3 Networking service 
 ![netwowrking](images/networking_service.png)
+
+
+4.4 Input in task and click in public 
+![task_created_in_service](images/task_crated_in_service.png)
+
+Click in ```Public IP``` => ```open address```
