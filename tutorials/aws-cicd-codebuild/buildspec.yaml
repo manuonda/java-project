@@ -3,6 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - cd tutorials/aws-cicd-codebuild   # Cambiar al subdirectorio con el pom.xml
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
