@@ -50,8 +50,56 @@ Amazon Elastic Container Registry (Amazon ECR) is an AWS managed container image
 
  ![aws_create_build_file_spec](images/create_build_step_2.png)
 
+  Finish "Create" and this will create the project.
+
  ![aws_created_finish](images/created_step3.png)
 
  **5** - Build project
- 
+ Click in **"Build"** and the result will be as follows :
 
+ ![aws_build_project](images/finished_compilation.png)
+
+ In the repository created with ECR, it contains the imagen creation.
+
+ ![aws_docker_image_build](images/repository_with_image.png)
+
+
+
+ **For now, we use Codebuild to create the image and push it to the repository created with ECR.**
+
+
+ ### Create ECS.
+ **Now that we have the image docker, we can use it to deploy it using ECS**.
+ Amazon Elastic Container Service (ECS) is a fully managed container orchestration service from AWS that allows you to run, manage, and scale Docker containers.
+
+
+#### Task definition
+
+In Amazon ECS (Elastic Container Service), a task is the smallest deployable unit of work. It represents an instance of a task definition that runs one or more containers.
+
+
+1 - Create task 
+![image_task](images/create_task.png)
+
+2 - Infraestructure requirements.
+
+![infraestructure](images/infraestruct_requirements.png)
+
+3 - Definition image container . In the container section, we can specify the  container of image. In the repository we can copy the  URI of the ECR.
+Add pòrt 8081 to run application
+
+
+![container](images/container.png)
+
+
+4 - Create cluster 
+![cluster](images/create_cluster.png)
+
+4.1 Create service 
+![create_service](images/create_service_environment.png)
+
+4.2 Configure deployment
+![deployment](images/deployment_configuration_service_task.png)
+
+4.3 Networking service 
+![netwowrking](images/networking_service.png)
