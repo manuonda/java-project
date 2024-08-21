@@ -6,7 +6,7 @@ phases:
       java: corretto17  # Opción para usar Java 17
   pre_build:
     commands:
-      - echo "Directorio de trabajo actual: $(pwd)"
+      - echo Directorio de trabajo actual: $(pwd)
       - cd tutorials/aws-cicd-codebuild   # Cambiar al subdirectorio con el pom.xml
       - echo "Directorio de trabajo actual después de cambiar: $(pwd)"
       - mvn clean install
@@ -41,5 +41,5 @@ phases:
 
 artifacts:
   files:
-    - imagedefinitions.json
+    - tutorials/aws-cicd-codebuild/imagedefinitions.json
     - tutorials/aws-cicd-codebuild/target/course-service.jar
