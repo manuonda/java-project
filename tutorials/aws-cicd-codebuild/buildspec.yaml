@@ -3,12 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17  # Opción para usar Java 17
+      java: corretto17
+    commands:
+      - echo "Directorio de trabajo actual (install): $(pwd)"
   pre_build:
     commands:
-      - echo $(pwd)
-      - cd tutorials/aws-cicd-codebuild   # Cambiar al subdirectorio con el pom.xml
-      - echo $(pwd)
+      - echo "Directorio de trabajo actual (pre_build) antes de cambiar: $(pwd)"
+      - cd tutorials/aws-cicd-codebuild
+      - echo "Directorio de trabajo actual (pre_build) después de cambiar: $(pwd)"
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
@@ -18,28 +20,22 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
+      - echo "Directorio de trabajo actual (build): $(pwd)"
       - echo Build started on `date`
-      - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
+      - echo "Directorio de trabajo actual (post_build): $(pwd)"
       - echo Build completed on `date`
-      - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - echo Writing image definitions file...
-      # add your container name
-      - DOCKER_CONTAINER_NAME=course-aws
-      - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - echo $DOCKER_CONTAINER_NAME
-      - echo printing imagedefinitions.json
+      - echo "Contenido de imagedefinitions.json:"
       - cat imagedefinitions.json
-
 
 artifacts:
   files:
-    - tutorials/aws-cicd-codebuild/imagedefinitions.json
+    - imagedefinitions.json
     - tutorials/aws-cicd-codebuild/target/course-service.jar
