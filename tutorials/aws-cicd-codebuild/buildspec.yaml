@@ -37,5 +37,5 @@ phases:
       - ls -l $(pwd)
 artifacts:
   files:
-    - $(pwd)/imagedefinitions.json
+    - imagedefinitions.json
     - tutorials/aws-cicd-codebuild/target/course-service.jar
