@@ -5,12 +5,12 @@ phases:
     runtime-versions:
       java: corretto17
     commands:
-      - echo "Directorio de trabajo actual (install): $(pwd)"
+      - echo "Directorio de trabajo actual (install):$(pwd)"
   pre_build:
     commands:
-      - echo "Directorio de trabajo actual (pre_build) antes de cambiar: $(pwd)"
+      - echo "Directorio de trabajo actual (pre_build) antes de cambiar:$(pwd)"
       - cd tutorials/aws-cicd-codebuild
-      - echo "Directorio de trabajo actual (pre_build) después de cambiar: $(pwd)"
+      - echo "Directorio de trabajo actual (pre_build) después de cambiar:$(pwd)"
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
@@ -20,13 +20,13 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - echo "Directorio de trabajo actual (build): $(pwd)"
+      - echo "Directorio de trabajo actual (build):$(pwd)"
       - echo Build started on `date`
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - echo "Directorio de trabajo actual (post_build): $(pwd)"
+      - echo "Directorio de trabajo actual (post_build):$(pwd)"
       - echo Build completed on `date`
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
