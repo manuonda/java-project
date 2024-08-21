@@ -6,7 +6,9 @@ phases:
       java: corretto17  # Opción para usar Java 17
   pre_build:
     commands:
+      - echo "Directorio de trabajo actual: $(pwd)"
       - cd tutorials/aws-cicd-codebuild   # Cambiar al subdirectorio con el pom.xml
+      - echo "Directorio de trabajo actual después de cambiar: $(pwd)"
       - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
