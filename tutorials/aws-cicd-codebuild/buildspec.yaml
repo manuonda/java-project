@@ -33,8 +33,8 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > $(pwd)/imagedefinitions.json
       - echo "Contenido de imagedefinitions.json:"
-      - cat tutorials/aws-cicd-codebuild/imagedefinitions.json
-      - ls -l tutorials/aws-cicd-codebuild/
+      - cat $(pwd)/imagedefinitions.json
+      - ls -l $(pwd)
 artifacts:
   files:
     - imagedefinitions.json
