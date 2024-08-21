@@ -65,15 +65,15 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/health")
-    public String healthCheck() {
-        return "UP";
-    }
+    // @GetMapping("/health")
+    // public String healthCheck() {
+    //     return "UP";
+    // }
 
 
-    @GetMapping("/welcome")
-    public String greetings() {
-        return "Hello Techie , AWS CICD Example working fine !";
-    }
+    // @GetMapping("/welcome")
+    // public String greetings() {
+    //     return "Hello Techie , AWS CICD Example working fine !";
+    // }
 
 }
