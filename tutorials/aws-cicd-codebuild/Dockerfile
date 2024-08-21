@@ -3,10 +3,10 @@ FROM openjdk:21
 #working dir
 WORKDIR /app
 #copy 
-COPY ./target/*.jar  /app/app.jar
+COPY ./target/course-service.jar  /app
 #expose 
 EXPOSE 8081
 #command 
-CMD ["java","-jar","app.jar"]
+CMD ["java","-jar","course-service.jar"]
 
 

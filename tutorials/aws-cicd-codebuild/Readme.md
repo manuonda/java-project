@@ -109,3 +109,12 @@ Add pòrt 8081 to run application
 ![task_created_in_service](images/task_crated_in_service.png)
 
 Click in ```Public IP``` => ```open address```
+
+![result_build](images/result_application.png)
+
+
+### CodePipeline (CD)
+
+We now use Codepipeline to automate deploy from commit to codebuild to deploy in ECS.
+![codepiplien](images/codepipeline_image.png)
+
