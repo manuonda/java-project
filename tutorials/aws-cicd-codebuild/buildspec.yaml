@@ -35,9 +35,7 @@ phases:
       - echo $DOCKER_CONTAINER_NAME
       - echo printing imagedefinitions.json
       - cat imagedefinitions.json
-         # Verificar si los archivos .jar están en el directorio target
-      - echo "Verificando la existencia de archivos .jar en el directorio target/..."
-      - ls -l tutorials/aws-cicd-codebuild/target/
+
 
 artifacts:
   files:
