@@ -2,3 +2,5 @@
 .idea/
 
 tutorials/threads/.vscode/
+
+tutorials/my-service/target/
