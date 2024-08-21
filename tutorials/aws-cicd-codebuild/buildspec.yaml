@@ -31,11 +31,11 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > tutorials/aws-cicd-codebuild/imagedefinitions.json
       - echo "Contenido de imagedefinitions.json:"
-      - cat imagedefinitions.json
-
+      - cat tutorials/aws-cicd-codebuild/imagedefinitions.json
+      - ls -l tutorials/aws-cicd-codebuild/
 artifacts:
   files:
-    - imagedefinitions.json
+    - tutorials/aws-cicd-codebuild/imagedefinitions.json
     - tutorials/aws-cicd-codebuild/target/course-service.jar
