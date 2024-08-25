@@ -11,6 +11,7 @@ The ```Outbox Pattern``` is a design pattern used to ensure data consistency bet
 
 ### Links  
 [Transactional outbox, manejo de eventos transaccionales](https://www.youtube.com/watch?v=vO3WbkmBUaQ)
+[Outbox Pattern in Spring Boot 3 and Apache Kafka ](https://dev.to/axeldlv/springkafka-outbox-pattern-in-spring-boot-3-and-apache-kafka-2o3o)
 
 
 
