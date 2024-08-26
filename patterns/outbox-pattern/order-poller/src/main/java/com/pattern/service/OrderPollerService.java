@@ -40,6 +40,7 @@ public class OrderPollerService {
         unprocessedRecords.forEach( outbox -> {
             try {
                 this.messagePublisher.publish(outbox.getPayload());
+                //update outbox record as processed
                 outbox.setProcessed(Boolean.TRUE);
                 this.outboxRepository.save(outbox);
             } catch (Exception e) {
