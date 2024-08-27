@@ -24,19 +24,61 @@ In this case the Service **Order Service** write in the tables ```order_tbl``` a
 - Apache Kakfa 
 
 
+#### Run Standalone application
+**<u>Director infra(kafka, zookeper, database)</u>**
 
-### Run Application using docker compose from Dockerfile 
+```
+outbox-pattern/deployment$ docker compose -f infra.yml up
+```
+**<u>Order service</u>**
+```
+outbox-pattern/order-service$ docker build -t order-service .
+outobx-pattern/order-service$ docker run -p 8081:8081 \
+  --network microservices \
+  -e DB_URL=order-db \
+  -e DB_PORT=5432 \
+  -e DB_NAME=postgres \
+  -e DB_USERNAME=postgres \
+  -e DB_PASSWORD=postgres \
+  order-service
+
+URL : http://localhost:8081/swagger-ui/index.html
+``` 
+
+ **<u>Order Poller</u>**
+ ```
+ outbox-pattern/order-poller$ docker build -t order-poller .
+ outbox-pattern/order-poller$ docker run -p 8082:8082 \
+  --network microservices \
+  -e DB_URL=order-db \
+  -e DB_PORT=5432 \
+  -e DB_NAME=postgres \
+  -e DB_USERNAME=postgres \
+  -e DB_PASSWORD=postgres \
+  -e KAFKA_URL=kafka \
+  -e KAFKA_PORT=19092 \
+  order-poller
+
+  URL application: http://localhost:8086/ui/clusters/local/brokers/1
+ ```
+
+
+#### Run Application using docker compose from Dockerfile 
+
+
 In the directory **deployment** run the next command to execute docker-compose : 
 ```
-deployment$  docker compose -f infra.yml  -f apps.yml up 
-[+] Running 5/0
- ✔ Container order-db       Created                                                                                                                                                                  0.0s 
- ✔ Container zoo            Created                                                                                                                                                                  0.0s 
- ✔ Container kafka-ui       Created                                                                                                                                                                  0.0s 
- ✔ Container kafka          Created                                                                                                                                                                  0.0s 
- ✔ Container order-service  Created                                                                                                                                                                  0.0s 
-Attaching to kafka, kafka-ui, order-db, order-service, zoo
+outbox-pattern/deployment$ docker compose -f infra.yml -f apps.yml up 
+[+] Running 6/0
+ ✔ Container kafka-ui       Created                                                                                                                                  0.0s 
+ ✔ Container zoo            Created                                                                                                                                  0.0s 
+ ✔ Container kafka          Created                                                                                                                                  0.0s 
+ ✔ Container order-db       Created                                                                                                                                  0.0s 
+ ✔ Container order-service  Created                                                                                                                                  0.0s 
+ ✔ Container order-poller   Created                   ```
 ```
+
+
 In the navigator OpenAPI:
 [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
 
