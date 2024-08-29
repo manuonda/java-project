@@ -64,6 +64,11 @@ public class DescriptionSpringBootAnnotationApplication {
 		System.out.println("Host: " + propertySourceDemo.getHost());
 		System.out.println("Email : "+ propertySourceDemo.getEmail());
 		System.out.println("Password : "+ propertySourceDemo.getPassword());
+		System.out.println("App Name : "+ propertySourceDemo.getAppName());
+		System.out.println("Description : "+ propertySourceDemo.getDescription());
+  
+		System.out.println("Environment Property Host : "+ propertySourceDemo.getEnvironmentPropertyHost());
+		System.out.println("Environment Property Server : "+ propertySourceDemo.getEnvironmentPropertyServer());
 
 	}
 
