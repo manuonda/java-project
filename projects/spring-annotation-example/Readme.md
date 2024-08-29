@@ -771,5 +771,209 @@ Password : 123456
 In the case of using multiple properties files we can use :
 Create file  ```src/main/resources/messages.properties```
 ```
+app.name=Spring Boot App
+app.description=Spring Boot App Description
 
 ```
+
+In the class file ```AppConfigProperty.java``` add reference to ```messages.properties```:
+
+```
+package com.spring.annotations.example.propertysource;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@PropertySource("classpath:mail.properties")
+@PropertySource("classpath:messages.properties")
+public class AppConfigProperty {
+
+}
+```
+In the class ```PropertySourceDemo.java``` add fields :
+```
+
+@Component
+public class PropertySourceDemo {
+
+
+    @Value("${gmail.host}")
+    private String host;
+
+    @Value("${gmail.email}")
+    private String email;
+
+    @Value("${gmail.password}")
+    private String password;
+
+    @Value("${app.name}")
+    private String appName;
+
+    @Value("${app.description}")
+    private String description;
+
+
+    public String getHost(){
+        return this.host;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    
+    public String getAppName(){
+        return this.appName;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+}
+
+```
+Run application java :
+```
+
+@SpringBootApplication
+public class DescriptionSpringBootAnnotationApplication {
+
+	public static void main(String[] args) {
+	/********* @Property Source ****** */
+		PropertySourceDemo propertySourceDemo = context.getBean(PropertySourceDemo.class);
+		System.out.println("Host: " + propertySourceDemo.getHost());
+		System.out.println("Email : "+ propertySourceDemo.getEmail());
+		System.out.println("Password : "+ propertySourceDemo.getPassword());
+		System.out.println("App Name : "+ propertySourceDemo.getAppName());
+		System.out.println("Description : "+ propertySourceDemo.getDescription());
+        	}
+
+}
+The output :
+Host: gmail.com
+Email : manuonda@gmail.com
+Password : 123456
+App Name : Spring Boot App
+Description : Spring Boot App Description
+
+```
+
+#### Use of **Environment**:
+
+In the clase ```PropertySourceDemo.java``` we can inject annotation Environment with @Autowired
+
+```
+@Component
+public class PropertySourceDemo {
+
+
+    @Autowired
+    private Environment environment;
+
+
+    @Value("${gmail.host}")
+    private String host;
+
+    @Value("${gmail.email}")
+    private String email;
+
+    @Value("${gmail.password}")
+    private String password;
+
+    @Value("${app.name}")
+    private String appName;
+
+    @Value("${app.description}")
+    private String description;
+
+
+    public String getHost(){
+        return this.host;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    
+    public String getAppName(){
+        return this.appName;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+
+    public String getEnvironmentPropertyHost(){
+        return environment.getProperty("gmail.host");
+    }
+
+    public String getEnvironmentPropertyServer(){
+        return environment.getProperty("gmail.email");
+    }   
+}
+
+
+```
+
+In the Application Run:
+
+
+```
+
+@SpringBootApplication
+public class DescriptionSpringBootAnnotationApplication {
+
+	public static void main(String[] args) {
+	
+		/********* @Property Source ****** */
+		PropertySourceDemo propertySourceDemo = context.getBean(PropertySourceDemo.class);
+		System.out.println("Host: " + propertySourceDemo.getHost());
+		System.out.println("Email : "+ propertySourceDemo.getEmail());
+		System.out.println("Password : "+ propertySourceDemo.getPassword());
+		System.out.println("App Name : "+ propertySourceDemo.getAppName());
+		System.out.println("Description : "+ propertySourceDemo.getDescription());
+  
+		System.out.println("Environment Property Host : "+ propertySourceDemo.getEnvironmentPropertyHost());
+		System.out.println("Environment Property Server : "+ propertySourceDemo.getEnvironmentPropertyServer());
+
+	}
+
+}
+
+The output:
+
+Host: gmail.com
+Email : manuonda@gmail.com
+Password : 123456
+App Name : Spring Boot App
+Description : Spring Boot App Description
+Environment Property Host : gmail.com
+Environment Property Server : manuonda@gmail.com
+```
+
+Another way to load properties from files is the following code in the  ``` PropertySourceDemo.java``` class
+
+```
+@Configuration
+// @PropertySource("classpath:mail.properties")
+// @PropertySource("classpath:messages.properties")
+
+@PropertySources({
+    @PropertySource("classpath:mail.properties"),
+    @PropertySource("classpath:messages.properties")
+})
+public class AppConfigProperty {
+
+}
+
+```
+
