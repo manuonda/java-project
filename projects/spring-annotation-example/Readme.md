@@ -676,3 +676,100 @@ public class ValueAnnotationDemo {
     /usr/lib/jvm/java-17-openjdk-amd64
 
 ```
+
+
+#### @PropertySource and @PropertySources Annotations
+
+
+* Spring **@PropertySource** annotation is used to provide properties file to Spring Environment.
+
+* Spring **@PropertySources** annotation is used to provide multiple properties to Spring Environment.
+
+File **resources/mail.properties**
+```
+gmail.host=gmail.com
+gmail.email=manuonda@gmail.com
+gmail.password=123456
+```
+Is created the class ```propertysource/AppConfigProperty.java```  that use the file **mail.properties**
+```
+package com.spring.annotations.example.propertysource;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@PropertySource("classpath:mail.properties")
+public class AppConfigProperty {
+
+}
+
+
+```
+Is created the class ```propertysource/PropertySourceDemo.java```
+
+```
+package com.spring.annotations.example.propertysource;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PropertySourceDemo {
+
+
+    @Value("${gmail.host}")
+    private String host;
+
+    @Value("${gmail.email}")
+    private String email;
+
+    @Value("${gmail.password}")
+    private String password;
+
+
+    public String getHost(){
+        return this.host;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+}
+
+```
+
+For use this class in the Application , inject code next: 
+```
+@SpringBootApplication
+public class DescriptionSpringBootAnnotationApplication {
+
+	public static void main(String[] args) {
+		 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	
+		/********* @Property Source ****** */
+		PropertySourceDemo propertySourceDemo = context.getBean(PropertySourceDemo.class);
+		System.out.println("Host: " + propertySourceDemo.getHost());
+		System.out.println("Email : "+ propertySourceDemo.getEmail());
+		System.out.println("Password : "+ propertySourceDemo.getPassword());
+
+	}
+
+}
+
+The output is next: 
+Host: gmail.com
+Email : manuonda@gmail.com
+Password : 123456
+```
+
+In the case of using multiple properties files we can use :
+Create file  ```src/main/resources/messages.properties```
+```
+
+```
