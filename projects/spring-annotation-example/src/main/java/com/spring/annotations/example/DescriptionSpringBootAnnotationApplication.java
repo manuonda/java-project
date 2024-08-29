@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.spring.annotations.example.controllers.MyController;
 import com.spring.annotations.example.controllers.PizzaController;
 import com.spring.annotations.example.lazy.LazyLoader;
+import com.spring.annotations.example.propertysource.PropertySourceDemo;
 import com.spring.annotations.example.repository.MyRepository;
 import com.spring.annotations.example.scope.PrototypeBean;
 import com.spring.annotations.example.scope.SingletonBean;
@@ -57,7 +58,13 @@ public class DescriptionSpringBootAnnotationApplication {
 		System.out.println(valueAnnotationDemo.getDefaultName());
 		System.out.println(valueAnnotationDemo.getEmailHost());
 		System.out.println(valueAnnotationDemo.getJavaHome());
-		
+	
+		/********* @Property Source ****** */
+		PropertySourceDemo propertySourceDemo = context.getBean(PropertySourceDemo.class);
+		System.out.println("Host: " + propertySourceDemo.getHost());
+		System.out.println("Email : "+ propertySourceDemo.getEmail());
+		System.out.println("Password : "+ propertySourceDemo.getPassword());
+
 	}
 
 }
