@@ -11,7 +11,7 @@ import com.manuonda.repository.OrderRepository;
 import com.manuonda.domain.entity.OrderStatus;
 
 @Service
-public class OrderServiceImpl implements OrderProcessingState{
+public class OrderServiceImpl implements OrderService{
 
 
     private final OrderRepository orderRepository;
@@ -29,6 +29,7 @@ public class OrderServiceImpl implements OrderProcessingState{
     /*
      * Save
      */
+    @Override
     public OrderDTO add(OrderDTO dto){
         Order order = toEntity(dto);
         Order orderSave = this.orderRepository.save(order);
@@ -36,6 +37,7 @@ public class OrderServiceImpl implements OrderProcessingState{
     }
 
 
+    @Override
     public List<OrderDTO> findAll(){
         List<Order> orders = this.orderRepository.findAll();
         return orders.stream().map(this::toDTO).toList();
@@ -47,11 +49,12 @@ public class OrderServiceImpl implements OrderProcessingState{
             dto.id(),
             OrderStatus.PENDING,
             dto.qty(),
-            dto.mount()
+            dto.mount(), 
+            null
         );
     }
 
-    public static final OrderDTO toDTO(Order order){
+    public final OrderDTO toDTO(Order order){
         return new OrderDTO(
             order.getId(),
             order.getStatus().name(),
