@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"  # Mapea el puerto 3307 de tu host al puerto 3306 del contenedor
+    volumes:
+      - mysql_data:/var/lib/mysql  # Volumen persistente para los datos de MySQL
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Carga el script SQL al iniciar
+
+volumes:
+  mysql_data:
