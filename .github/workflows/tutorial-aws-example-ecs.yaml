@@ -1,4 +1,4 @@
-name: Example to Amazon ECS
+name: Tutorial - Example to Amazon ECS
 
 on:
   push:
