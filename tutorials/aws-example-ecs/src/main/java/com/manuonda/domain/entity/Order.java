@@ -34,29 +34,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String orderNumber;
     
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
 
-    @NotEmpty(message = "Not Empty qty")
     private int qty;
 
     private double amount;
-
-    @Embedded
-    @AttributeOverrides(
-        value = {
-            @AttributeOverride(name = "addressLine1", column = @Column(name = "delivery_address_line1")),
-            @AttributeOverride(name = "addressLine2", column = @Column(name = "delivery_address_line2")),
-            @AttributeOverride(name = "city", column = @Column(name = "delivery_address_city")),
-            @AttributeOverride(name = "state", column = @Column(name = "delivery_address_state")),
-            @AttributeOverride(name = "zipCode", column = @Column(name = "delivery_address_zip_code")),
-            @AttributeOverride(name = "country", column = @Column(name = "delivery_address_country")),
-        }
-    )
-    private Address deliveryAddress;
-
 
     
 }

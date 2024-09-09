@@ -47,16 +47,17 @@ public class OrderServiceImpl implements OrderService{
     public static final Order toEntity(OrderDTO dto) {
         return new Order(
             dto.id(),
+            dto.orderNumber(),
             OrderStatus.PENDING,
             dto.qty(),
-            dto.mount(), 
-            null
+            dto.mount()
         );
     }
 
     public final OrderDTO toDTO(Order order){
         return new OrderDTO(
             order.getId(),
+            order.getOrderNumber(),
             order.getStatus().name(),
             order.getQty(),
             order.getAmount()
