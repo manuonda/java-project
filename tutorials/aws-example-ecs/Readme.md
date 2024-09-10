@@ -60,13 +60,22 @@ This project demonstrates how to set up a continuous integration and deployment 
 
   At this user we can see the Access key ID and the Secret access key, we need to save this credentials in the GitHub repository
 
+  Create Security Credentiasl for this user.
 
-- Create a new repository in AWS ECR
-![new_repository](./images/ecr_repository.png)
+  Authenticate with this user : ```user-github-actions```
+
+- Create a new repository in AWS ECR in the regions ```us-east-1``` : 
+  ***github-actions-first-example***
+![new_repository](./images/ecr.png)
  
-  We need to get the URI of the repository, this URI is used in the GitHub Actions workflow to push the image to the repository, this URI is used in the workflow to deploy the image to the ECS cluster and the ECR_REPOSITORY
+  We need to get the name of the repository is used in the GitHub Actions workflow to push the image to the repository, this URI is used in the workflow to deploy the image to the ECS cluster and the ECR_REPOSITORY
 
-- Go to the repository settings and create a new secrets, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, AWS_ACCOUNT_ID (this referent to the AWS account) and ```ECR_REPOSITORY ``(Uri of the repository)
+- Go to the repository settings and create a new secrets, the information is referent to user information :
+  * AWS_ACCESS_KEY_ID 
+  * AWS_SECRET_ACCESS_KEY
+  * AWS_ACCOUNT_ID (this referent to the AWS account) 
+  * ECR_REPOSITORY ```github-actions-first-example(name of the repository)```
+
 ![repository_settings](./images/github_security_21.png)
 
 
