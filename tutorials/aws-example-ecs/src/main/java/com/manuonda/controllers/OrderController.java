@@ -59,6 +59,8 @@ public class OrderController {
     
 
     @PutMapping("{id}")
+    @Operation(summary = "Update Order")
+    @ApiResponse(responseCode="200", description = "Response status 200 OK")
     public String putMethodName(@PathVariable String id, @RequestBody String entity) {
         System.out.println("hola munod");
         return null;
