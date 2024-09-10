@@ -1,5 +1,6 @@
 #Use the official Openjdk 17 image from Docker Hub
-FROM openjdk:21-jdk-slim
+#FROM openjdk:21-jdk-slim
+FROM maven:3.9-eclipse-temurin-21 AS builder
 
 WORKDIR /app
 #Copy the compiled java application JAR file into the container 
