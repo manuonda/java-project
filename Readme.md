@@ -27,6 +27,6 @@ En Curso.
 - [Project Blog Event Driven "Spring Boot + Angular + AWS  +Apachek Kafka"] ()
 
 
-Listado de Recursos Medio-Avanzado:
+Listado de Recursos Medio-Avanzado.
 
 
