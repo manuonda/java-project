@@ -79,10 +79,39 @@ This project demonstrates how to set up a continuous integration and deployment 
 ![repository_settings](./images/github_security_21.png)
 
 
+- Create Database in AWS , in this case using Mysql Database free tier.
+
+![db_1](./images/db-1.png)
+
+![db_2](./images/db-2.png)
+
+![db_3](./images/db-3.png)
+
+Creation databse
+![db_4](./images/db-4.png)
 
 
+- Create a cluster and task using ECS to deploy application using the image located in ECR in this case the URI
+
+![cluster_1](./images/cluster-1.png)
+
+![cluster_2](./images/cluster-2.png)
 
 
+- Create task Role 
+  
+![task_role](./images/create-task-role.png)
+
+- Create task in this case , select the Rol ```ecsTaskExecuteRole``` created in the previous step
+  
+![task-1](./images/task-1.png)
+
+* Configure Container
+  URI the image, use the image referente create in the step ```ECR```
+
+  ![]
+
+ 
 
 ### Usage
 
