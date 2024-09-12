@@ -110,6 +110,10 @@ This project demonstrates how to set up a continuous integration and deployment 
 ![cluster_2](./images/cluster-2.png)
 
 
+- **Create a secret manager variables to use in task definition **
+
+![secret_manager](./images/secret-manager.png)
+
 - **Create task Role** 
   
 ![task_role](./images/create-task-role.png)
