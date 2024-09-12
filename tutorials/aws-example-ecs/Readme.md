@@ -118,6 +118,8 @@ This project demonstrates how to set up a continuous integration and deployment 
   
 ![task-1](./images/task-1.png)
 
+
+
 * Configure Container
   URI the image, use the image referente create in the step ```ECR```
 
