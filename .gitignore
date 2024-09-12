@@ -63,3 +63,5 @@ tutorials/tutorial-lambda-crud/target/maven-status/maven-compiler-plugin/compile
 tutorials/tutorial-lambda-crud/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 tutorials/tutorial-lambda-crud/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 tutorials/tutorial-lambda-crud/.vscode/settings.json
+
+.vscode/
