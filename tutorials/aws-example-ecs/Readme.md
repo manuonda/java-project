@@ -12,6 +12,9 @@ This project demonstrates how to set up a continuous integration and deployment 
    - Spring Boot
    - Spring Data JPA
    - Openapi (Swagger)
+   - Docker / Dockerfile
+   - GitHub Actions
+
    
 
 
@@ -79,7 +82,7 @@ This project demonstrates how to set up a continuous integration and deployment 
 ![repository_settings](./images/github_security_21.png)
 
 
-- Create Database in AWS , in this case using Mysql Database free tier.
+- **Create Database in AWS , in this case using Mysql Database free tier**.
 
 ![db_1](./images/db-1.png)
 
@@ -87,18 +90,27 @@ This project demonstrates how to set up a continuous integration and deployment 
 
 ![db_3](./images/db-3.png)
 
-Creation databse
+
 ![db_4](./images/db-4.png)
 
 
-- Create a cluster and task using ECS to deploy application using the image located in ECR in this case the URI
+```Creation database name init```
+
+![db_5](./images/db-5.png)
+
+```Database created```
+
+![db_4](./images/db-6.png)
+
+
+- **Create a cluster**
 
 ![cluster_1](./images/cluster-1.png)
 
 ![cluster_2](./images/cluster-2.png)
 
 
-- Create task Role 
+- **Create task Role** 
   
 ![task_role](./images/create-task-role.png)
 
