@@ -133,25 +133,28 @@ Create environments to connect to database,this use the variables create in secr
 ![environments](./images/task-variables-entorno.png)
 
 
+
 * **Create Service from Cluster**
+  
 ![service_1](./images/service1.png)
+
+Select task to work, the most receintly.
 
 ![service_2](./images/service2.png)
 
+Once the service is created , select the task worked on
+
+![service_3](./images/service3.png)
+
+Select the ip public and click. then open in browser on url and add port 8081.
+
+![servicio_4](./images/servicio4.png)
 
 
+
+In case it's correct , this Swagger application opens on the page. 
+
+![swagger](./images/swagger-end.png)
  
- 
 
-### Usage
-
-(Instructions on how to use and deploy the application)
-
-### Contributing
-
-(Guidelines for contributing to the project)
-
-### License
-
-(License information)
 
