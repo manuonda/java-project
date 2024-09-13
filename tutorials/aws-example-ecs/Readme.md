@@ -110,7 +110,7 @@ This project demonstrates how to set up a continuous integration and deployment 
 ![cluster_2](./images/cluster-2.png)
 
 
-- **Create a secret manager variables to use in task definition **
+- **Create a secret manager** variables to use in task definition 
 
 ![secret_manager](./images/secret-manager.png)
 
@@ -118,17 +118,29 @@ This project demonstrates how to set up a continuous integration and deployment 
   
 ![task_role](./images/create-task-role.png)
 
-- Create task in this case , select the Rol ```ecsTaskExecuteRole``` created in the previous step
+- ***Create task*** in this case , select the Rol ```ecsTaskExecuteRole``` created in the previous step
   
 ![task-1](./images/task-1.png)
 
 
+Create infraestructure
 
-* Configure Container
-  URI the image, use the image referente create in the step ```ECR```
+![!task-infraestructure](./images/task-infraestructura.png)
 
-  ![]
 
+Create environments to connect to database,this use the variables create in secrets manager : ```DB_HOST, DB_USERNAME, DB_PASSWORD ```
+
+![environments](./images/task-variables-entorno.png)
+
+
+* **Create Service from Cluster**
+![service_1](./images/service1.png)
+
+![service_2](./images/service2.png)
+
+
+
+ 
  
 
 ### Usage
