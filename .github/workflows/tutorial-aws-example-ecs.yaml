@@ -16,7 +16,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   ECS_SERVICE: service-spring-boot-5
   ECS_CLUSTER: cluster-github
-  ECS_TASK_DEFINITION: task-ecs-spring-boot
+  ECS_TASK_DEFINITION: ./tutorials/aws-example-ecs/task-ecs-spring-boot
   CONTAINER_NAME: spring-boot                          # name of the container name in the task definition
 
 jobs:
