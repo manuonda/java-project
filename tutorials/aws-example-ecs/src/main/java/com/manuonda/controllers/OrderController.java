@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 /**
- * Order Controller V1 Order
+ * Order Controller V1 Order Controller to allow creat orders and get items
  */
 
 @RestController
