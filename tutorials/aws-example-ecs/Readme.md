@@ -54,6 +54,17 @@ This project demonstrates how to set up a continuous integration and deployment 
 7. **Application Live**:
    - Updated application is now running on ECS
 
+### Create docker image and test locally
+With the Dockerfile we can create the image container
+In the path run the next command :
+ ```
+ $ ./mvnw clean install -D skipTests 
+ 
+ $ 
+
+```
+
+
 ### Setup and Configuration
 - Create a user in AWS IAM in this case we create a user with AdministratorAccess to the AWS account
 ![iam_user](./images/iam_user.png)
@@ -158,3 +169,5 @@ In case it's correct , this Swagger application opens on the page.
  
 
 
+#### Links
+![ECS Deployments with GitHub Actions](https://medium.com/@octavio/ecs-deployments-with-github-actions-dd34beed6528)
