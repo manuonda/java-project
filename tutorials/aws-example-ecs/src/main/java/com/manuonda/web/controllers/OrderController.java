@@ -1,10 +1,11 @@
-package com.manuonda.controllers;
+package com.manuonda.web.controllers;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 /**
@@ -61,11 +64,19 @@ public class OrderController {
     }
     
 
+    @GetMapping("{id}")
+    @Operation(summary = "Get Order")
+    @ApiResponse(responseCode = "200", description="Response Status 200 Ok")
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable("id") Long  id) {
+          OrderDTO orderDTO = this.service.findById(id);
+          return ResponseEntity.status(HttpStatus.FOUND).body(orderDTO);
+    }
+    
+
     @PutMapping("{id}")
     @Operation(summary = "Update Order")
     @ApiResponse(responseCode="200", description = "Response status 200 OK")
-    public String putMethodName(@PathVariable String id, @RequestBody String entity) {
-        System.out.println("hola munod232323");
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable String id, @RequestBody String entity) {
         return null;
     }
 
