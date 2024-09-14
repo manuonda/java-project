@@ -17,7 +17,7 @@ env:
   ECS_SERVICE: service-spring-boot-5
   ECS_CLUSTER: cluster-github
   ECS_TASK_DEFINITION: task-ecs-spring-boot
-  CONTAINER_NAME: app                          # name of the container name in the task definition
+  CONTAINER_NAME: spring-boot                          # name of the container name in the task definition
 
 jobs:
   build:
