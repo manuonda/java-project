@@ -14,4 +14,6 @@ public interface OrderService {
 
     public List<OrderDTO> findAll();
 
+    public OrderDTO findById(Long id);
+
 }
