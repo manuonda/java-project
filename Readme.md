@@ -16,17 +16,8 @@
 - [Spring Boot IA - Base Prompt , PromptTemplate, Imagen](https://github.com/manuonda/java-project/tree/main/ia/open-ai-chat)
 - [Spring Boot IA - Use SimpleVectorDatabase , Documentation Assistant, Document Faq Pokemon](https://github.com/manuonda/java-project/tree/main/ia/tutorial-base-rag)
 
+## List Tutorials 
+- [Spring Boot Application Deployment with GitHub Actions, ECR, and ECS](https://github.com/manuonda/java-project/tree/main/tutorials/aws-example-ecs)
 
-## List Resources Applications
-
-En Curso.
-
-
-- [Desafio Marzo- 2024](https://www.ejemplo.com/git)
-- [Event Drive Tutorial - Base ]()
-- [Project Blog Event Driven "Spring Boot + Angular + AWS  +Apachek Kafka"] ()
-
-
-Listado de Recursos Medio-Avanzado.
 
 
