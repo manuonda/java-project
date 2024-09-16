@@ -1,4 +1,4 @@
-# Spring Boot Application Deployment with GitHub Actions, ECR, and ECS
+# Spring Boot Application Deployment with GitHub Actions, ECR and ECS
 
 ## Automated CI/CD Pipeline for AWS Elastic Container Service
 
@@ -53,6 +53,17 @@ This project demonstrates how to set up a continuous integration and deployment 
 
 7. **Application Live**:
    - Updated application is now running on ECS
+
+### Create docker image and test locally
+With the Dockerfile we can create the image container
+In the path run the next command :
+ ```
+ $ ./mvnw clean install -D skipTests 
+ 
+ $ 
+
+```
+
 
 ### Setup and Configuration
 - Create a user in AWS IAM in this case we create a user with AdministratorAccess to the AWS account
@@ -158,3 +169,9 @@ In case it's correct , this Swagger application opens on the page.
  
 
 
+#### Links
+[ECS Deployments with GitHub Actions](https://medium.com/@octavio/ecs-deployments-with-github-actions-dd34beed6528)
+
+[amazon-ecs-render-task-definition ](https://github.com/aws-actions/amazon-ecs-render-task-definition)
+
+[Deploy Spring Boot Application On AWS ECS Using GitHub Action](https://www.youtube.com/watch?v=OMn866JBEtQ&t=1693s)

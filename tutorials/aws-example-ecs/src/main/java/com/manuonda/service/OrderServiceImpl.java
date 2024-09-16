@@ -1,6 +1,7 @@
 package com.manuonda.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.actuate.autoconfigure.health.HealthProperties.Status;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.manuonda.domain.dto.OrderDTO;
 import com.manuonda.domain.entity.Order;
 import com.manuonda.repository.OrderRepository;
+import com.manuonda.web.exception.ResourceNotFound;
 import com.manuonda.domain.entity.OrderStatus;
 
 @Service
@@ -63,6 +65,16 @@ public class OrderServiceImpl implements OrderService{
             order.getAmount()
         );
     }
+
+    @Override
+    public OrderDTO findById(Long id) {
+        Order order = this.orderRepository.findById(id)
+        .orElseThrow(()-> new ResourceNotFound("Order Not Found") );
+        return this.toDTO(order);
+    }
+
+
+
 
 
 
