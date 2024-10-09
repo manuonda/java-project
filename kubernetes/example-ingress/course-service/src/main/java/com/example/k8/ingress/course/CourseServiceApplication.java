@@ -24,7 +24,7 @@ public class CourseServiceApplication {
 	}
 
 	@GetMapping("/allCourses")
-	public List<Course> getMethodName(@RequestParam String param) {
+	public List<Course> getMethodName() {
 		return Stream.of(
 			new Course(1L,"course1", 23.5),
 			new Course(2L,"course2",25.4)
