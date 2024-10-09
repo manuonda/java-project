@@ -20,7 +20,7 @@ public class BlogServiceApplication {
 	}
 
 	@GetMapping("/allBlogs")
-	public List<Blog> getMethodName(@RequestParam String param) {
+	public List<Blog> getMethodName() {
 		return Stream.of(
 			new Blog("1", "title1", "content1", "author1"),
 			new Blog("2", "title2", "content2", "author2")
