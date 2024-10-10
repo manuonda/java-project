@@ -64,7 +64,7 @@ spec:
 +------------------+     +------------------+
 
 
-```
+
 
 ### Ejemplo de Rutas
 
@@ -78,76 +78,83 @@ spec:
   - `/course/list`: Acceso a la lista de cursos disponibles.
   - `/course/details`: Acceso a los detalles de un curso específico.
 
+
 ### Ejemplo de Configuración de Ingress
 
 Aquí tienes un ejemplo de cómo podría verse el recurso Ingress para estos dos servicios:
 
-```yaml
-apiVersion: networking.k8s.io/v1
+```apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: microservices-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: blog.example.com
-    http:
-      paths:
-      - path: /blog
-        pathType: Prefix
-        backend:
-          service:
-            name: blog-service
-            port:
-              number: 80
-      - path: /blog/posts
-        pathType: Prefix
-        backend:
-          service:
-            name: blog-service
-            port:
-              number: 80
-      - path: /blog/authors
-        pathType: Prefix
-        backend:
-          service:
-            name: blog-service
-            port:
-              number: 80
-  - host: course.example.com
-    http:
-      paths:
-      - path: /course
-        pathType: Prefix
-        backend:
-          service:
-            name: course-service
-            port:
-              number: 80
-      - path: /course/list
-        pathType: Prefix
-        backend:
-          service:
-            name: course-service
-            port:
-              number: 80
-      - path: /course/details
-        pathType: Prefix
-        backend:
-          service:
-            name: course-service
-            port:
-              number: 80
+    - host: javatechie.com
+      http:
+        paths:
+          - path: "/course(/|$)(.*)"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: course-service
+                port:
+                  number: 80
+          - path: "/blog(/|$)(.*)"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: blog-service
+                port:
+                  number: 80
 ```
 
-### Conclusión
+### Instructions
+#### Build Blog Service and push Docker
+$ ```docker login```
 
-Este diagrama y la configuración de Ingress muestran cómo el navegador se comunica con el Ingress Controller, que a su vez dirige las solicitudes a los servicios de **Blog** y **Curso** según las rutas definidas. Si necesitas más detalles o ajustes, házmelo saber.
+blog-service$ ```./mvnw  clean install -D skipTests```
+
+blog-service$ ```docker build -t manuonda/blog-service-ingress:1.0 ```
+
+blog-service$ ```docker push  manuonda/blog-service-ingress:1.0``` 
 
 
+#### Build Course Service and push Docker
 
-$ minikube start
-$ minikube addons enable ingress 
+course-service$ ```./mvnw  clean install -D skipTests```
+
+course-service$ ```docker build -t  manuonda/course-service-ingress:1.0 . ```
+
+course-service$ ```docker push  manuonda/course-service-ingress:1.0 ```
+
+
+#### Kubernetes 
+
+$ ``` minikube start```
+
+$ ```minikube addons enable ingress```
+
+blog-service$ ```kubectl  apply -f k8s-deployment.yaml``` 
+
+course-service$ ``` kubectl  apply -f k8s-deployment.yam```
+
+$ ```kubectl apply -f ingress.yaml```
+
+```
 $ kubectl  get pod -n ingress-nginx
+
+NAME                                        READY   STATUS      
+
+RESTARTS      AGE
+
+ingress-nginx-admission-create-zgm7n        0/1     Completed   0             2d
+
+ingress-nginx-admission-patch-zwrzr         0/1     Completed   2             2d
+ingress-nginx-controller-7c6974c4d8-hr2jj   1/1     Running     4 (56m ago)   2d
+
+```
 
 ```
 $ kubectl get svc -n ingress-nginx
@@ -156,4 +163,59 @@ ingress-nginx-controller             NodePort    10.96.105.209    <none>        
 ingress-nginx-controller-admission   ClusterIP   10.103.121.152   <none>        443/TCP                      90m
 ```
 
-$ kubectl get deployment -n ingress-nginx
+
+```
+$ minikube ip
+192.168.49.2
+```
+
+#### Add row to file :  $ nano cat/hosts 
+
+```192.168.49.2  javatechie.com```
+
+
+
+
+
+### Testing 
+```
+ $ curl  http://javatechie.com/blog/allBlogs
+
+[
+  {
+    "id": "1",
+    "title": "title1",
+    "content": "content1",
+    "author": "author1"
+  },
+  {
+    "id": "2",
+    "title": "title2",
+    "content": "content2",
+    "author": "author2"
+  }
+]
+
+$ curl http://javatechie.com/course/allCourses
+
+[
+  {
+    "courseId": 1,
+    "name": "course1",
+    "price": 23.5
+  },
+  {
+    "courseId": 2,
+    "name": "course2",
+    "price": 25.4
+  }
+]
+
+```
+
+
+
+### Conclusión
+
+Este diagrama y la configuración de Ingress muestran cómo el navegador se comunica con el Ingress Controller, que a su vez dirige las solicitudes a los servicios de **Blog** y **Curso** según las rutas definidas. Si necesitas más detalles o ajustes, házmelo saber.
+
