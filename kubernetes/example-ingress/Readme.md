@@ -6,6 +6,8 @@ Kubernetes is an open-source platform designed to automate deploying, scaling, a
 ## Ingress Controller
 An Ingress Controller is a specialized load balancer for Kubernetes that manages the routing of external HTTP/S traffic to the services in your cluster. It listens for changes to Ingress resources and updates its configuration accordingly.
 
+![image_ingress](ingress_example.drawio.png)
+
 ### Key Features:
 - **Traffic Management**: Directs traffic based on rules defined in Ingress resources.
 - **SSL Termination**: Handles SSL certificates and terminates SSL connections.
@@ -46,22 +48,6 @@ spec:
 
 
 ```
-
-+-----------+          +--------------------+
-|   Cliente  | ------> | Ingress Controller |
-| (Browser)  |         |                    |
-+-----------+          +--------------------+
-                           |
-     ----------------------|
-    |                      |
-    v                      v
-+------------------+     +------------------+
-|  Blog Service    |     |  Course Service  |
-|                  |     |                  |
-|  /blog           |     |  /course         |
-|  /blog/posts     |     |  /course/list    |
-|  /blog/authors   |     |  /course/details |
-+------------------+     +------------------+
 
 
 
@@ -217,5 +203,7 @@ $ curl http://javatechie.com/course/allCourses
 
 ### Conclusión
 
-Este diagrama y la configuración de Ingress muestran cómo el navegador se comunica con el Ingress Controller, que a su vez dirige las solicitudes a los servicios de **Blog** y **Curso** según las rutas definidas. Si necesitas más detalles o ajustes, házmelo saber.
+Este diagrama y la configuración de Ingress muestran cómo el navegador se comunica con el Ingress Controller, que a su vez dirige las solicitudes a los servicios de **Blog** y **Curso** según las rutas definidas. 
 
+### Links Articles
+[ Mastering Kubernetes Ingress | Hands-on Example with Spring Boot & NGINX | ‪@Javatechie‬ ](https://www.youtube.com/watch?v=_CG40cU3TbY&t=797s)
