@@ -64,5 +64,13 @@ public class GlobalExceptionHandler  extends ResponseEntityExceptionHandler{
     }
 
 
+    @ExceptionHandler(PaymentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseExceptionDTO> handEntityPaymentException(PaymentException ex){
+        ResponseExceptionDTO dto = new ResponseExceptionDTO(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.ok(dto);
+    }
+
+
 
 }

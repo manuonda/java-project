@@ -18,7 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByIdCategory(Long id);
 
 
-    @Query(value = "SELECT * FROM posts p WHERE p.title  LIKE  ?1% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts p WHERE p.title  LIKE  ?1%", nativeQuery = true)
     List<Post> searchPost(String  title);
 
     /*

@@ -17,8 +17,8 @@
 - Swagger
 
  ## Diagrama de Project.
-<br>
 
+![resources](identification_blog.png)
 
 
 
@@ -45,4 +45,8 @@ Navigate to [http://localhost:8085/swagger-ui/index.html](http://localhost:8085/
 
 
 
-https://dev.to/thecodersden/effortless-containerization-deploying-spring-boot-and-mysql-with-docker-and-docker-compose-e8n
+### Links 
+
+```Course Realizaded```[ Building Real-Time REST APIs with Spring Boot - Blog App](https://www.udemy.com/course/building-real-time-rest-apis-with-spring-boot/)
+
+[Effortless Containerization: Deploying Spring Boot and MySQL with Docker and Docker Compose](https://dev.to/thecodersden/effortless-containerization-deploying-spring-boot-and-mysql-with-docker-and-docker-compose-e8n)
