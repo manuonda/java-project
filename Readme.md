@@ -2,7 +2,7 @@
 
 #Development : manuonda(David Garcia)
 
-## List Patterns Desing
+## List Patterns Design
 - [Sidecar Pattern](https://github.com/manuonda/java-project/tree/main/patterns/sidecar)
 - [Outbox Pattern](https://github.com/manuonda/java-project/tree/main/patterns/outbox-pattern)
 

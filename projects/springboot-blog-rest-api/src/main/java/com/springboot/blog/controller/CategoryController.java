@@ -53,7 +53,7 @@ public class CategoryController {
     )
     //Build Add Category Rest Api 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDTO> postAddCategory(@Valid @RequestBody CategoryDTO dto){
         CategoryDTO categoryDTO = this.categoryService.createCategory(dto);
         return ResponseEntity.status(HttpStatus.OK).body(categoryDTO);
