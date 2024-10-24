@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import com.pattern.design.processor.PaymentProcessor;
 
 
+/**
+ * GooglePayment Adapter
+ */
+
 @Component
 public class GPayAdapter implements PaymentProcessor{
 
