@@ -5,6 +5,7 @@
 ## List Patterns Design
 - [Sidecar Pattern](https://github.com/manuonda/java-project/tree/main/patterns/sidecar)
 - [Outbox Pattern](https://github.com/manuonda/java-project/tree/main/patterns/outbox-pattern)
+- [Adapter Pattern](https://github.com/manuonda/java-project/tree/main/patterns/pattern-adapter)
 
 ## List Resources Testing
 
