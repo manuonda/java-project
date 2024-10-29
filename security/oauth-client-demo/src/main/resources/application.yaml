@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: oauth-client-demo
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId:
+            clientSecret:
+
+logging:
+  level:
+    org.springframework.security: TRACE 
