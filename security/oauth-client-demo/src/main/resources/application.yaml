@@ -1,3 +1,6 @@
+server:
+  port: 8082
+  
 spring:
   application:
     name: oauth-client-demo
@@ -6,8 +9,13 @@ spring:
       client:
         registration:
           google:
-            clientId:
-            clientSecret:
+            clientId: 565478090085-sllo4mrpqllndlvc2kem90sjjkgg4vsn.apps.googleusercontent.com
+            clientSecret: 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
+    user:
+      name: dgarcia
+      password:  12345678
+
+
 
 logging:
   level:
