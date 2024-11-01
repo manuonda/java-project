@@ -9,11 +9,14 @@ spring:
       client:
         registration:
           google:
-            clientId: 
-            clientSecret: 
-        
-      name: dgarcia23
-      password:  12345678
+            clientId: ${GOOGLE_CLIENT_ID}
+            clientSecret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile  
+    user:
+      name: dgarcia
+      password: 12345678
 
 
 
