@@ -12,7 +12,7 @@ spring:
             clientId: 
             clientSecret: 
         
-      name: dgarcia
+      name: dgarcia23
       password:  12345678
 
 
