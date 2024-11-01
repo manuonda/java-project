@@ -65,3 +65,4 @@ tutorials/tutorial-lambda-crud/target/maven-status/maven-compiler-plugin/testCom
 tutorials/tutorial-lambda-crud/.vscode/settings.json
 
 .vscode/
+security/oauth-client-demo/.env

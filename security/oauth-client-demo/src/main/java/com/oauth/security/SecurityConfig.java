@@ -11,7 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.oauth.security.filter.PrivateFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,21 +25,23 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(c -> c.disable())
-        .authorizeHttpRequests( request -> {
-           request.requestMatchers(HttpMethod.GET,"/login").permitAll();
-           request.anyRequest().authenticated();
+        .authorizeHttpRequests( authorize -> {
+           authorize.requestMatchers("/login").permitAll();
+           authorize.anyRequest().authenticated();
         })
         .httpBasic(Customizer.withDefaults())
         .formLogin(Customizer.withDefaults())
+        .logout(l -> l.logoutSuccessUrl("/login"))
+        .addFilterBefore(new PrivateFilter(), AuthorizationFilter.class)
         .oauth2Login(Customizer.withDefaults());
         return http.build();
-    }
+    }   
 
 
-    private ClientRegistration clientRegistration(){
-        return ClientRegistration.withRegistrationId("google")
-        .clientId("null")
-        .clientSecret("null")
-        .clientAuthenticationMethod()
-    }
+    // private ClientRegistration clientRegistration(){
+    //     return ClientRegistration.withRegistrationId("google")
+    //     .clientId("null")
+    //     .clientSecret("null")
+    //     .clientAuthenticationMethod()
+    // }
 }
