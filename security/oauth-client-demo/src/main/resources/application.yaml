@@ -9,10 +9,11 @@ spring:
       client:
         registration:
           google:
-            clientId: 
-            clientSecret: 
-      name: 
-      password:  
+            clientId: 565478090085-3hgfi3j367671lpq5rdfrt1i31t7992r.apps.googleusercontent.com
+            clientSecret: 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
+        
+      name: dgarcia
+      password:  12345678
 
 
 
