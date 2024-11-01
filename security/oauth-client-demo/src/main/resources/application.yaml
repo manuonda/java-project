@@ -9,7 +9,8 @@ spring:
       client:
         registration:
           google:
-         
+            clientId: 
+            clientSecret: 
         
       name: dgarcia
       password:  12345678
