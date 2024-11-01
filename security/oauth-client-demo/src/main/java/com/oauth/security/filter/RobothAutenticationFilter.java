@@ -1,6 +1,7 @@
 package com.oauth.security.filter;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
@@ -19,14 +20,18 @@ public class RobothAutenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-       // 1 Decide whetter we want to apply the filter¿
+       // 1 Decide whetter we want to apply the filter?
+       if (!Collections.list(request.getHeaderNames()).contains("x-robot-secret")){
+          filterChain.doFilter(request, response);
+          return;
+       }
 
        // 2 Check credentials and (authenticated | reject)
        if(!Objects.equals(request.getHeader("x-robot-secret"), "beep-boop")){
          response.setStatus(HttpStatus.FORBIDDEN.value());
          response.setCharacterEncoding("UTF-8");
          response.setHeader("Content-Type","text/plain");
-         response.getWriter().write(" ==== FORBIDDEN ====");
+         response.getWriter().write(" ==== You are nots mr Robots FORBIDDEN ====");
          return;
        }
 

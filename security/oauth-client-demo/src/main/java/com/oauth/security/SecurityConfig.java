@@ -15,6 +15,7 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.oauth.security.filter.PrivateFilter;
+import com.oauth.security.filter.RobothAutenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +33,7 @@ public class SecurityConfig {
         .httpBasic(Customizer.withDefaults())
         .formLogin(Customizer.withDefaults())
         .logout(l -> l.logoutSuccessUrl("/login"))
-        .addFilterBefore(new PrivateFilter(), AuthorizationFilter.class)
+        .addFilterBefore(new RobothAutenticationFilter(), AuthorizationFilter.class)
         .oauth2Login(Customizer.withDefaults());
         return http.build();
     }   
