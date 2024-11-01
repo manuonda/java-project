@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.oauth.security.token.RobotAuthenticationToken;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,6 +29,12 @@ public class RobothAutenticationFilter extends OncePerRequestFilter {
          response.getWriter().write(" ==== FORBIDDEN ====");
          return;
        }
+
+       var auth = new RobotAuthenticationToken();
+       var newContext = SecurityContextHolder.createEmptyContext();
+       newContext.setAuthentication(auth);
+       SecurityContextHolder.setContext(newContext);
+       
        // 3 Call next 
        filterChain.doFilter(request, response);
     }
