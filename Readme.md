@@ -13,6 +13,10 @@
 
 - [Testing Spring Webflux , TestContainers ](https://github.com/manuonda/java-project/tree/main/testing-webflux )
 
+
+### Spring Boot Security 
+- [Example Basic Spring Boot OAuth Client, Jte ](https://github.com/manuonda/java-project/tree/main/security/oauth-client-demo)
+
 ## List Spring Boot IA
 - [Spring Boot IA - Base Prompt , PromptTemplate, Imagen](https://github.com/manuonda/java-project/tree/main/ia/open-ai-chat)
 - [Spring Boot IA - Use SimpleVectorDatabase , Documentation Assistant, Document Faq Pokemon](https://github.com/manuonda/java-project/tree/main/ia/tutorial-base-rag)
