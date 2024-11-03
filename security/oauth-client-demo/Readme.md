@@ -1,18 +1,29 @@
+# OAuth2 with Spring Boot and Custom Authentication
+
+This project demonstrates an OAuth2 implementation using Spring Boot and Spring Security. It also covers custom authentication operations using filters, a dedicated `AuthenticationManager`, and a custom `AuthenticationProvider` to handle user authentication and authorization effectively. 
+Then also use of filters.
+
 
 
 
 ### Set environments
 ```bash
-export GOOGLE_CLIENT_ID=565478090085-3hgfi3j367671lpq5rdfrt1i31t7992r.apps.googleusercontent.com 
-export GOOGLE_CLIENT_SECRET=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
-export GITHUB_CLIENT_ID=
-export GITHUB_CLIENT_SECRET=
+export GOOGLE_CLIENT_ID=your_google_client_id 
+export GOOGLE_CLIENT_SECRET=your_google_client_secret
+export GITHUB_CLIENT_ID=your_github_client_id
+export GITHUB_CLIENT_SECRET=your_github_client_secret
+```
 
+### Example user and password 
+```
+username: dgarcia
+password: 12345678
 ```
 
 
 
-### Link Security 
+
+### Link Architecture Spring Security 
 * [ Spring Security Architecture Principles by Daniel Garnier-Moiroux @ Spring I/O 2024 ](https://www.youtube.com/watch?v=HyoLl3VcRFY&t=831s)
 
 

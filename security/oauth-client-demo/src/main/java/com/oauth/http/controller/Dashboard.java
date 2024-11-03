@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nimbusds.jose.proc.SecurityContext;
+import com.oauth.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,21 +16,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 
 
-@RestController
-@RequestMapping("/api/v1/dashboard")
+@Controller
 public class Dashboard {
 
-    public record UserDTO(String userName, String email, Collection<GrantedAuthority> authorities) {
+  
 
-    }
     @GetMapping
-    public UserDTO getDashboardAuthenticated(Authentication authentication) {
+    public String indexDashboard(Authentication authentication,Model model) {
         var auth = SecurityContextHolder.getContext().getAuthentication();
         
         var userName="";
@@ -48,7 +49,10 @@ public class Dashboard {
             }
         }
 
-        return  new UserDTO(userName, email, authorities);
+        var userDTO = new UserDTO(userName, email, authorities);
+
+        model.addAttribute("usuario", userDTO);
+        return  "index";
     }
     
 }
