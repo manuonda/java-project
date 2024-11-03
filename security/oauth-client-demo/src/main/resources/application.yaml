@@ -1,6 +1,10 @@
 server:
   port: 8082
-  
+
+gg:
+  jte:
+    developmentMode: true
+
 spring:
   application:
     name: oauth-client-demo
