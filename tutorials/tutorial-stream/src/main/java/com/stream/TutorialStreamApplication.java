@@ -53,8 +53,25 @@ public class TutorialStreamApplication {
 		 List<Integer> nums = Arrays.asList(1,2,3,4,5);
 		 int sum = nums.stream().parallel().map(  i -> i + 1)
 		 .reduce(0,Integer::sum);
+		 System.out.println("Suma : " + sum);
+
+		 int sum2 = nums.parallelStream().map( i -> i + 1)
+		 .reduce( 0 , Integer::sum);
+
+		 System.out.println("Sum parallelStream : " + sum2);
 
 
+		 int total = IntStream.range(1,10).map(TutorialStreamApplication::principal).sum();
+         System.out.println("Total threads: " + total); 
+	}
+
+	public static int principal(int numero) {	
+	 try {
+		Thread.sleep(1000);
+	 } catch (Exception e) {
+		// TODO: handle exception
+	 }
+	 return numero * 2;
 	}
 
 }
