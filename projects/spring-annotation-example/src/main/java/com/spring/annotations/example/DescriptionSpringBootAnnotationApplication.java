@@ -3,6 +3,7 @@ package com.spring.annotations.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.spring.annotations.example.configurationproperties.AppDemo;
 import com.spring.annotations.example.controllers.MyController;
 import com.spring.annotations.example.controllers.PizzaController;
 import com.spring.annotations.example.lazy.LazyLoader;
@@ -70,6 +71,10 @@ public class DescriptionSpringBootAnnotationApplication {
 		System.out.println("Environment Property Host : "+ propertySourceDemo.getEnvironmentPropertyHost());
 		System.out.println("Environment Property Server : "+ propertySourceDemo.getEnvironmentPropertyServer());
 
+		/*** ConfigurationProperties */
+		System.out.println("Configuration Properties");
+		AppDemo appDemo = context.getBean(AppDemo.class);
+		appDemo.display();
 	}
 
 }
