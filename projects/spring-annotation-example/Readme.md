@@ -1300,4 +1300,47 @@ public class BookController {
 }
 ```
 
+### @PostMapping and @RequestBody
+1 - The post Http methos is used to create a resource and ```@PostMapping``` annotation for mapping HTTP POST request onto specific handler method.
 
+2 - Specifically, ```@PostMapping``` is a composed annotation that acts as a shortcurt for ```@RequestMapping(method=RequestMethod.POST)```
+
+3 - The ```@RequestBody``` annotation is responsible for retrieving the HTTP request body and automatically converting it to the Java object.
+
+```java
+//@Controller
+//@ResponseBody
+@RestController
+@RequestMapping("/api")
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    //@ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    //@RequestMapping("/book")
+    //@ResponseBody
+    @GetMapping(value = {"/books","/java"})
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+    //@RequestMapping(method = RequestMethod.POST)
+    @PostMapping(value = "/books/create" ,
+    consumes= MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        System.out.println(book.id());
+        System.out.println(book.name());
+        System.out.println(book.description());
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
+       // return new ResponseEntity<>(book, HttpStatus.CREATED);
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+
+```
