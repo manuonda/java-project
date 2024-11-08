@@ -962,7 +962,7 @@ Environment Property Server : manuonda@gmail.com
 
 Another way to load properties from files is the following code in the  ``` PropertySourceDemo.java``` class
 
-```
+```java
 @Configuration
 // @PropertySource("classpath:mail.properties")
 // @PropertySource("classpath:messages.properties")
@@ -976,4 +976,328 @@ public class AppConfigProperty {
 }
 
 ```
+
+####  `@ConfigurationProperties` in Spring Boot
+
+In Spring Boot, the `@ConfigurationProperties` annotation maps external configuration properties (from files like `application.properties` or `application.yml`) to a Java class. This approach organizes configurations in an object, making them easier to manage.
+
+## Steps to Use `@ConfigurationProperties`
+
+1. **Define a Configuration Class**: Create a Java class with fields matching the properties you need.
+2. **Set Properties in `application.properties` or `application.yml`**: Use a common prefix for related properties.
+3. **Annotate with `@ConfigurationProperties`**: Specify the prefix.
+4. **Enable with `@EnableConfigurationProperties`**: Do this in a config class or the main application class.
+
+***application.properties***
+```java
+app.name=ConfigurationProperties
+app.description=ConfigurationPropertiesDemo Description
+app.uploadDir=/uploads
+
+
+#Nested objects
+app.security.username=manuonda
+app.security.password=secret
+app.security.roles=USER,ADMIN,GUEST
+app.security.enabled=true
+
+
+## Map properties
+app.security.permissions.ADD=true
+app.security.permissions.UPDATE=true
+app.security.permissions.DELETE=true
+app.security.permissions.GET=true
+
+
+
+```
+
+Create class **configurationproperties/ApplicationProperties.java**
+```java
+
+package com.spring.annotations.example.configurationproperties;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix ="app")
+public class AppProperties {
+
+    private String name;
+    private String description;
+    private String uploadDir;
+    private Security security = new Security();
+    
+
+    public static class Security{
+        private String username;
+        private String password;
+        List<String> roles = new ArrayList<>();
+        private boolean enabled;
+        private Map<String, String> permissions = new HashMap<>();
+
+
+        public String getUsername() {
+            return username;
+        }
+        public void setUsername(String username) {
+            this.username = username;
+        }
+        public String getPassword() {
+            return password;
+        }
+        public void setPassword(String password) {
+            this.password = password;
+        }
+        public List<String> getRoles() {
+            return roles;
+        }
+        public void setRoles(List<String> roles) {
+            this.roles = roles;
+        }
+        public boolean isEnabled() {
+            return enabled;
+        }
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+        public Map<String, String> getPermissions() {
+            return permissions;
+        }
+        public void setPermissions(Map<String, String> permissions) {
+            this.permissions = permissions;
+        }
+
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getUploadDir() {
+        return uploadDir;
+    }
+    public void setUploadDir(String uploadDir) {
+        this.uploadDir = uploadDir;
+    }
+    public Security getSecurity() {
+        return security;
+    }
+    public void setSecurity(Security security) {
+        this.security = security;
+    }
+
+
+    
+
+}
+
+
+```
+
+Using class **configurationproperties/AppDemo.java**
+
+```java 
+package com.spring.annotations.example.configurationproperties;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class AppDemo {
+    @Autowired
+    private AppProperties appProperties;
+
+    public void display(){
+        System.out.println(appProperties.getName());
+        System.out.println(appProperties.getDescription());
+        System.out.println(appProperties.getUploadDir());
+        System.out.println(appProperties.getSecurity().getUsername());
+        System.out.println(appProperties.getSecurity().getPassword());
+        System.out.println(appProperties.getSecurity().getRoles());
+        System.out.println(appProperties.getSecurity().isEnabled());
+        System.out.println(appProperties.getSecurity().getPermissions());
+    }
+    
+}
+```
+
+Execute class in the main principal: 
+```java
+
+	public static void main(String[] args) {
+		 var context = SpringApplication.run(DescriptionSpringBootAnnotationApplication.class, args);
+	 	/*** ConfigurationProperties */
+		System.out.println("Configuration Properties");
+		AppDemo appDemo = context.getBean(AppDemo.class);
+		appDemo.display();
+	}
+
+    
+  Output:
+    Description : ConfigurationPropertiesDemo Description
+    Environment Property Host : gmail.com
+    Environment Property Server : manuonda@gmail.com
+    Configuration Properties
+    ConfigurationProperties
+    ConfigurationPropertiesDemo Description
+    /uploads
+    manuonda
+    secret
+    [USER, ADMIN, GUEST]
+    true
+    {ADD=true, UPDATE=true, DELETE=true, GET=true}
+```
+
+
+###  `@Controller` and `@ResponseBody` in Spring Boot
+
+In Spring Boot, `@Controller` is used to define a class that handles HTTP requests, often serving HTML pages. When combined with `@ResponseBody`, methods can return data directly as the HTTP response, typically JSON. For RESTful APIs, the `@RestController` annotation is a more concise option that combines both `@Controller` and `@ResponseBody`.
+
+
+That use I need ```spring-boot-starter-web```
+Create class Controller ```BookController.java```
+
+```java
+package com.spring.annotations.example.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@Controller
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    @ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    @RequestMapping("/book")
+    @ResponseBody
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+```
+
+
+#### @RestController 
+
+```@RestController ```when all methods in a controller should return data directly, as it combines **@Controller** and **@ResponseBody**
+
+Modificate class ```BookController.java```
+
+```java
+package com.spring.annotations.example.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+//@Controller
+//@ResponseBody
+@RestController
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    //@ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    @RequestMapping("/book")
+    //@ResponseBody
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+```
+
+#### @RequestMapping
+```@RequestMapping``` annotation is used to map web requests to Spring Controller methods
+
+```@RequestMapping``` can be applied to the controller class as well as handler methods.
+
+```java
+//@Controller
+//@ResponseBody
+@RestController
+@RequestMapping("/api")
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    //@ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    @RequestMapping("/book")
+    //@ResponseBody
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+```
+
+#### @GetMapping
+1 -  The GET HTTP request is used to get a single or multiple resources and @GetMapping annotation for mapping HTTP GET requests onto specific handler methods.
+
+2 - Specifically, @GetMapping is a composed annotation that acts as a shortcut for @RequestaMapping(method=RequestMethod.GET)
+
+```java
+//@Controller
+//@ResponseBody
+@RestController
+@RequestMapping("/api")
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    //@ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    //@RequestMapping("/book")
+    //@ResponseBody
+    @GetMapping(value = {"/books","/java"})
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+```
+
 
