@@ -2,6 +2,9 @@
 
 #Development : manuonda(David Garcia)
 
+## Projects
+- [Annotations of SpringBoot](https://github.com/manuonda/java-project/tree/main/projects/spring-annotation-example)
+
 ## List Patterns Design
 - [Sidecar Pattern](https://github.com/manuonda/java-project/tree/main/patterns/sidecar)
 - [Outbox Pattern](https://github.com/manuonda/java-project/tree/main/patterns/outbox-pattern)
