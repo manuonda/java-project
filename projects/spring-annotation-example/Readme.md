@@ -18,6 +18,30 @@ Inyección de Dependencias: Spring Boot utiliza la inyección de dependencias pa
 
 Ciclo de Vida: El contenedor IoC de Spring se encarga de todo el ciclo de vida de un bean, desde su creación hasta su destrucción, aplicando configuraciones como la inicialización y destrucción personalizada si se han definido.
 
+ #### **Links**
+ [@Component Annotation](#component-annotation)
+ [@Autowired](#autowired)
+ [@Qualifier](#qualifier)
+ [@Primary](#primary)
+ [@Bean and @Configuration](#bean-and-configuration)
+ [@Repository, @Controller and @Service](#repository-controller-and-service)
+ [@Lazy](#lazy)
+ [@Scope](#scope)
+ [@Value](#value)
+ [@PropertySource and @PropertySources Annotations](#propertysource-and-propertysources-annotations)
+ [Use of **Environment**](#use-of-environment)
+ [@ConfigurationProperties in Spring Boot](#configurationproperties-in-spring-boot)
+ [Steps to Use @ConfigurationProperties](#steps-to-use-configurationproperties)
+ [@Controller and @ResponseBody in Spring Boot](#controller-and-responsebody-in-spring-boot)
+ [@RestController](#restcontroller)
+ [@RequestMapping](#requestmapping)
+ [@GetMapping](#getmapping)
+ [@PostMapping and @RequestBody](#postmapping-and-requestbody)
+ [@PutMapping](#putmapping)
+ [@DeleteMapping](#deletemapping)
+ [@PathVariable and @RequestParam](#pathvariable-and-requestparam)
+ [Links](#links)
+
 
 ## Annotations 
 ### @Component Annotation
@@ -977,11 +1001,11 @@ public class AppConfigProperty {
 
 ```
 
-####  `@ConfigurationProperties` in Spring Boot
+###  `@ConfigurationProperties` in Spring Boot
 
 In Spring Boot, the `@ConfigurationProperties` annotation maps external configuration properties (from files like `application.properties` or `application.yml`) to a Java class. This approach organizes configurations in an object, making them easier to manage.
 
-## Steps to Use `@ConfigurationProperties`
+### Steps to Use `@ConfigurationProperties`
 
 1. **Define a Configuration Class**: Create a Java class with fields matching the properties you need.
 2. **Set Properties in `application.properties` or `application.yml`**: Use a common prefix for related properties.
@@ -1164,7 +1188,7 @@ Execute class in the main principal:
 ```
 
 
-###  `@Controller` and `@ResponseBody` in Spring Boot
+###  ```@Controller``` and ```@ResponseBody``` in Spring Boot
 
 In Spring Boot, `@Controller` is used to define a class that handles HTTP requests, often serving HTML pages. When combined with `@ResponseBody`, methods can return data directly as the HTTP response, typically JSON. For RESTful APIs, the `@RestController` annotation is a more concise option that combines both `@Controller` and `@ResponseBody`.
 
@@ -1239,7 +1263,7 @@ public class BookController {
 }
 ```
 
-#### @RequestMapping
+### @RequestMapping
 ```@RequestMapping``` annotation is used to map web requests to Spring Controller methods
 
 ```@RequestMapping``` can be applied to the controller class as well as handler methods.
@@ -1269,7 +1293,7 @@ public class BookController {
 }
 ```
 
-#### @GetMapping
+### @GetMapping
 1 -  The GET HTTP request is used to get a single or multiple resources and @GetMapping annotation for mapping HTTP GET requests onto specific handler methods.
 
 2 - Specifically, @GetMapping is a composed annotation that acts as a shortcut for @RequestaMapping(method=RequestMethod.GET)
@@ -1344,3 +1368,121 @@ public class BookController {
 }
 
 ```
+### @PutMapping 
+
+1 - The PUT HTTP methos is used to update the resource and ```@PutMapping```annotation for mapping HTTP PUT request onto specific handler method.
+
+2 - Specifically, ```@PutMapping``` is a composed annotation that acts as shortcurt for ```@RequestMapping(method=RequestMethod.PUT)```
+
+```java 
+//@Controller
+//@ResponseBody
+@RestController
+@RequestMapping("/api")
+public class BookController {
+
+    @RequestMapping("/hello-world")
+    //@ResponseBody
+    public String hello() {
+        return "Hello World";
+    }
+
+    //@RequestMapping("/book")
+    //@ResponseBody
+    @GetMapping(value = {"/books","/java"})
+    public Book getBook() {
+        return new Book(1, "Title1", "Description one");
+    }
+    
+
+    //@RequestMapping(method = RequestMethod.POST)
+    @PostMapping(value = "/books/create" ,
+    consumes= MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        System.out.println(book.id());
+        System.out.println(book.name());
+        System.out.println(book.description());
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
+       // return new ResponseEntity<>(book, HttpStatus.CREATED);
+    }
+    
+
+    // @RequestMapping(value = "/books/update/{id}", 
+    //  method=RequestMethod.PUT,
+    //  produces = MediaType.APPLICATION_JSON_VALUE)
+    
+    @PutMapping("/api/books/update/{id}")
+    public ResponseEntity<Book> updateBookEntity(@RequestBody Book book, @PathVariable("id") Integer id) {
+        System.out.println(book.id());
+        System.out.println(book.name());
+        System.out.println(book.description());
+        
+        return ResponseEntity.status(HttpStatus.OK).body(book);
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+}
+```
+
+
+### @DeleteMapping 
+
+1 - The DELETE HTTP methos is used to delete the resource and ```@DeleteMapping```annotation for mapping HTTP DELETE request onto specific handler method.
+
+2 - Specifically, ```@DeleteMapping``` is a composed annotation that acts as shortcurt for ```@RequestMapping(method=RequestMethod.DELETE)```
+
+
+```java
+    // @RequestMapping(value = "/books/update/{id}", 
+    //  method=RequestMethod.DELETE)
+    @DeleteMapping("/api/books/update/{id}")
+    public ResponseEntity<String> deleteBookEntity(@PathVariable("id") Integer id) {
+        System.out.println("id : {}".formatted(id));
+       return ResponseEntity.status(HttpStatus.OK).body("Book delete successfully")
+    }
+    
+
+    public record Book(Integer id, String name, String description){}
+    
+```
+
+
+### @PathVariable and @RequestParam
+
+1 - ```@PathVariable``` annotation used on a method argument to bind the value of a URI template variable to a method argument
+
+```java 
+
+
+    @GetMapping("/books/{id}/{title}/{description}")
+    public void pathVariableDemo(@PathVariable("id")  Integer id,
+                                 @PathVariable("title") String title,
+                                 @PathVariable("description") String description) {
+        System.out.println("id : {}".formatted(id));
+        System.out.println("title : {}".formatted(title));
+        System.out.println("description : {}".formatted(description));
+
+    }
+```
+
+
+2 - ```@RequestParam```Annotation
+We can use @RequestParam to extract query parameters from the request
+
+```java 
+
+    //http://localhost:8080/api/books/query?id=1&title=Core Java
+    @GetMapping("/books/query")
+    public void requestParam(@RequestParam("id") Integer id, 
+                             @RequestParam("title") String title) {
+        System.out.println("id : {}".formatted(id));
+        System.out.println("title : {}".formatted(title));
+    }
+```
+
+
+### Links 
+[Course  - Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS](https://www.udemy.com/course/building-real-time-rest-apis-with-spring-boot/)
+
