@@ -66,3 +66,5 @@ tutorials/tutorial-lambda-crud/.vscode/settings.json
 
 .vscode/
 security/oauth-client-demo/.env
+
+projects/algoritmo-estructura-datos/target/
