@@ -1,0 +1,24 @@
+name: Tutorial - Subrpocess 
+
+on:
+ push:
+   paths:
+     - 'tutorials/subprocess/**'
+   branches:
+     - '**'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./tutorials/subprocesss
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
+    steps:
+      - name : Checkout source
+        uses: actions/checkout@v4
+      - name : Setup Java 21
+      
+
