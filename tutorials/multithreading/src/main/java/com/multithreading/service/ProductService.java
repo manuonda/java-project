@@ -1,6 +1,10 @@
 package com.multithreading.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +22,6 @@ import lombok.AllArgsConstructor;
 @Service
 public class ProductService {
 
-   
     private final ProductRepository repository;
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
@@ -31,7 +34,8 @@ public class ProductService {
         this.objectMapper = objectMapper;
         this.topicName = topicName;
     }
-    
+
+
     public String resetRecords() {
         repository.findAll()
                 .forEach(product -> {
@@ -46,8 +50,7 @@ public class ProductService {
     @Transactional
     public void processProductIds(List<Long> productIds) {
         productIds.parallelStream()
-        .forEach(this::fetchUpdateAndPublish);
-        
+                .forEach(this::fetchUpdateAndPublish);
     }
 
     private void fetchUpdateAndPublish(Long productId) {
