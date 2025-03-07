@@ -125,6 +125,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+    <finalName>multithreading</finalName>
 	</build>
 
 </project>
