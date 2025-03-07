@@ -1,7 +1,26 @@
 services:
   
   multithread:
-    
+    image: multithread:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - 'DB_HOST=mysql' 
+      - 'DB_USERNAME=root'
+      - 'DB_PASSWORD=root'
+      - 'DB_PORT=3306'     # Fixed colon to equals sign
+      - 'DB_NAME=db'       # Added missing variable
+      - 'KAFKA_HOST=kafka'
+      - 'KAFKA_PORT=29092'
+    ports:
+      - '9393:9393'
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+        
   mysql:
     image: 'mysql:latest'
     container_name: mysql_test
@@ -10,6 +29,11 @@ services:
       - 'MYSQL_ROOT_PASSWORD=root'
     ports:
       - '3306:3306'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      timeout: 5s
+      retries: 10
+      interval: 5s
 
   zookeeper:
     image: 'confluentinc/cp-zookeeper:latest'
