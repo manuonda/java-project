@@ -12,7 +12,7 @@
 3. Dividing Records into Batches
 4. Asynchronous Processing with `CompletableFuture`
 5. To Execute la application in Docker Compose 
-6. Tools Visualization
+6. Examples
 7. Conclusion
 8. Links
 
@@ -92,8 +92,7 @@ To load applications from docker file compos is the next command:
 ```docker-compose -f docker-applications-compose.yaml```
 
 
-
-### 6 Tool Kafka UI 
+#### Tool Kafka UI 
 To access and view the Kafka topics and the messages being sent, you can go to the URL `http://localhost:8090`.
 
 Topic: 
@@ -104,11 +103,9 @@ To visualize the Kafka UI, refer to the following screenshot:
 ![Kafka UI](images/kafkaui.png)
 
 
-### 7. Conclusion
 
-In this repository, you have in code how to process millions of records in batches using Spring Boot and `CompletableFuture` for parallel processing. This technique can significantly improve the performance of your application by leveraging the power of multithreading.
 
-### Example CURL Requests
+### 6.  Example CURL Requests
 
 #### Reset Records
 
@@ -139,6 +136,10 @@ curl -w "\nTiempo total: %{time_total}s\n" --location 'http://localhost:9393/api
 ```
 
 Measure the execution time for each request to compare performance.
+
+### 7. Conclusion
+
+In this repository, you have in code how to process millions of records in batches using Spring Boot and `CompletableFuture` for parallel processing. This technique can significantly improve the performance of your application by leveraging the power of multithreading.
 
 ### 8 Links
 [Spring Boot - Multithreading | Process Millions of Records in Batches | Hands-on Example ](https://www.youtube.com/watch?v=qaSBljS6SZk&t=1519s)
