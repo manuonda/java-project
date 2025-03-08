@@ -24,7 +24,7 @@
 ## List Tutorials 
 - [Spring Boot Application Deployment with GitHub Actions, ECR, and ECS](https://github.com/manuonda/java-project/tree/main/tutorials/aws-example-ecs)
 - [Spring Boot Application Example Improve API performance by dividing the process into threads](https://github.com/manuonda/java-project/tree/main/tutorials/subprocess)
-- - [Spring Boot Application Example Improve API performance by dividing the process into threads(Include Docker Compose File)](https://github.com/manuonda/java-project/tree/main/tutorials/multithreading)
+- [Spring Boot Application Example Improve API performance by dividing the process into threads(Include Docker Compose File)](https://github.com/manuonda/java-project/tree/main/tutorials/multithreading)
 
 
 ## Kubernetes 
