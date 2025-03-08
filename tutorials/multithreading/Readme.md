@@ -91,6 +91,8 @@ To Create Jar to use in Dockerfile is the next command:
 To load applications from docker file compos is the next command:
 ```docker-compose -f docker-applications-compose.yaml```
 
+
+
 ### 6 Tool Kafka UI 
 To access and view the Kafka topics and the messages being sent, you can go to the URL `http://localhost:8090`.
 
