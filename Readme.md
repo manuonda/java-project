@@ -28,7 +28,7 @@
 
 
 ### Arquitectura 
-- [Hexagonal - init probject basic](https://https://github.com/manuonda/java-project/tree/main/architecture/hexagonal/hexagonal-init/)
+- [Hexagonal - init probject basic](https://https://github.com/manuonda/java-project/tree/main/architecture/hexagonal-init/)
 
 
 ## Kubernetes 
