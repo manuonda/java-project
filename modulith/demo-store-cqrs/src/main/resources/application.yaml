@@ -2,6 +2,8 @@ spring:
   application:
     name: demo-store-cqrs
 
+
+#configuracion de jpa hibernate
   datasource:
     url: jdbc:postgresql://localhost:5432/store_db
     username: postgres
@@ -13,11 +15,37 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgresqlDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
+# Configuracion de flyway para migraciones
   flyway:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
 
+  #Configuracion especifica de Spring Modulith
+  modulith:
+    events:
+      # ¿Qué hace? Guarda eventos procesados para auditoría
+      # Alternativa: delete (elimina eventos procesados para ahorrar espacio)
+      completion-mode: archive
+
+      # ¿Para qué? Si la app se reinicia, re-procesa eventos pendientes
+      # Garantiza que ningún evento se pierda
+      republish-outstanding-events-on-restart: true
+
+  #Logging para desarrollo - ver que hace Spring Modulith
+  logging:
+    level:
+      com.modulith.cqrs : DEBUG
+      org.springframework.modulith: DEBUG
+server:
+  port: 8090
+
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
