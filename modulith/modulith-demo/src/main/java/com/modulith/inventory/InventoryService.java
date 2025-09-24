@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class InventoryService {
+public class InventoryService {
 
     @EventListener
     void on(OrderCreatedEvent event) {

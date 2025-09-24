@@ -1,6 +1,8 @@
 package com.modulith.orders.domain;
 
 import com.modulith.catalog.ProductService;
+import com.modulith.catalog.domain.ProductRepository;
+import com.modulith.inventory.InventoryService;
 import com.modulith.orders.domain.events.OrderCreatedEvent;
 import com.modulith.orders.domain.models.CreateOrderRequest;
 import com.modulith.orders.domain.models.CreateOrderResponse;
