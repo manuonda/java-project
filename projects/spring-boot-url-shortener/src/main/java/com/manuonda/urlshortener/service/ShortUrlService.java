@@ -8,15 +8,18 @@ import com.manuonda.urlshortener.repositorys.ShortUrlRepository;
 import com.manuonda.urlshortener.repositorys.UserRepository;
 import com.manuonda.urlshortener.ApplicationProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.InvalidUrlException;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import static com.manuonda.urlshortener.service.RandomUtils.generateRandomShortKey;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
+@Transactional(readOnly = true)
 public class ShortUrlService {
 
     private final ShortUrlRepository shortUrlRepository;
@@ -41,6 +44,7 @@ public class ShortUrlService {
               .toList();
     }
 
+    @Transactional
     public ShortUrlDto createShortUrl(CreateShortUrlCmd cmd) {
         ShortUrl shortUrl = new ShortUrl();
         if(properties.validateOriginalUrl()){
@@ -77,5 +81,19 @@ public class ShortUrlService {
             shortKey = generateRandomShortKey();
         } while (shortUrlRepository.existsByShortKey(shortKey));
         return shortKey;
+    }
+
+    public Optional<ShortUrlDto> accessShortUrl(String shortKey) {
+      Optional<ShortUrl> shortUrlOptional =  this.shortUrlRepository.findByShortKey(shortKey);
+      if(shortUrlOptional.isEmpty()){
+          return Optional.empty();
+      }
+      ShortUrl shortUrl = shortUrlOptional.get();
+      if (shortUrl.getExpiresAt() != null && shortUrl.getExpiresAt().isBefore(Instant.now())) {
+            return Optional.empty();
+      }
+      shortUrl.setClickCount(shortUrl.getClickCount() + 1);
+      this.shortUrlRepository.save(shortUrl);
+      return shortUrlOptional.map(entityMapper::toShortUrlDto);
     }
 }

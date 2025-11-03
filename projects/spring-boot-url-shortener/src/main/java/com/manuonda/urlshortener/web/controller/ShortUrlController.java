@@ -2,7 +2,9 @@ package com.manuonda.urlshortener.web.controller;
 
 
 
+import com.manuonda.urlshortener.domain.exceptions.ShortUrlNotFoundException;
 import com.manuonda.urlshortener.domain.models.CreateShortUrlCmd;
+import com.manuonda.urlshortener.domain.models.ShortUrlDto;
 import com.manuonda.urlshortener.service.ShortUrlService;
 import com.manuonda.urlshortener.ApplicationProperties;
 import jakarta.validation.Valid;
@@ -14,19 +16,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.manuonda.urlshortener.web.dto.CreateShortUrlForm;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
 
 
 @Controller
-public class HomeController {
+public class ShortUrlController {
 
-    private static final Logger logger  = LoggerFactory.getLogger(HomeController.class.getName());
+    private static final Logger logger  = LoggerFactory.getLogger(ShortUrlController.class.getName());
     private final ShortUrlService shortUrlService;
     private final ApplicationProperties applicationProperties;
 
-    public HomeController(ShortUrlService shortUrlService, ApplicationProperties applicationProperties) {
+    public ShortUrlController(ShortUrlService shortUrlService, ApplicationProperties applicationProperties) {
         this.shortUrlService = shortUrlService;
         this.applicationProperties = applicationProperties;
     }
@@ -70,5 +74,15 @@ public class HomeController {
         }
 
         return  "redirect:/";
+    }
+
+    @GetMapping("/s/{shortKey}")
+    String redirectToOriginalUrl(@PathVariable String shortKey) {
+        Optional<ShortUrlDto> shortUrlDtoOptional  = this.shortUrlService.accessShortUrl(shortKey);
+        if (shortUrlDtoOptional.isEmpty()) {
+            throw new ShortUrlNotFoundException("Invalid short URL key: " + shortKey);
+        }
+        ShortUrlDto shortUrlDto = shortUrlDtoOptional.get();
+        return "redirect:" + shortUrlDto.originalUrl();
     }
 }

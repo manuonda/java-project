@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.JpaRepositoryNameSpaceHandler;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
    List<ShortUrl> findByIsPrivateIsFalseOrderByCreatedAtDesc();
@@ -26,4 +27,6 @@ public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
 
 
    boolean existsByShortKey(String shortKey);
+
+   Optional<ShortUrl>  findByShortKey(String shortKey);
 }
