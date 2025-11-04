@@ -24,13 +24,13 @@ import java.util.Optional;
 
 
 @Controller
-public class ShortUrlController {
+public class HomeController {
 
-    private static final Logger logger  = LoggerFactory.getLogger(ShortUrlController.class.getName());
+    private static final Logger logger  = LoggerFactory.getLogger(HomeController.class.getName());
     private final ShortUrlService shortUrlService;
     private final ApplicationProperties applicationProperties;
 
-    public ShortUrlController(ShortUrlService shortUrlService, ApplicationProperties applicationProperties) {
+    public HomeController(ShortUrlService shortUrlService, ApplicationProperties applicationProperties) {
         this.shortUrlService = shortUrlService;
         this.applicationProperties = applicationProperties;
     }
@@ -85,4 +85,10 @@ public class ShortUrlController {
         ShortUrlDto shortUrlDto = shortUrlDtoOptional.get();
         return "redirect:" + shortUrlDto.originalUrl();
     }
+
+    @GetMapping("/login")
+    String login() {
+        return "login";
+    }
 }
+
